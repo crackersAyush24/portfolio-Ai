@@ -8,6 +8,7 @@ import Experience from './components/Experience';
 import Contact from './components/Contact';
 import ScrollingCharacter from './components/ScrollingCharacter';
 import AIParticleBackground from './components/AIParticleBackground';
+import AyushChatbot from './components/AyushChatbot'; // 👈 Import your chatbot
 
 function App() {
   return (
@@ -23,7 +24,10 @@ function App() {
         <Experience />
         <Contact />
       </main>
-      
+
+      {/* Floating Chatbot */}
+      <AyushChatbot />  {/* 👈 Add chatbot here */}
+
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
