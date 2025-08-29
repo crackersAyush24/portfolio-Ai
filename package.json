@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://crackersayush24.github.io/portfolio-Ai",
+  "homepage": "https://crackersayush24.github.io/portfolio-ai",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
