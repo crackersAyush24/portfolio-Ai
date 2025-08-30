@@ -1,10 +1,12 @@
-name: Deploy Vite site to GitHub Pages
+name: Deploy Vite React App to GitHub Pages
 
+# Trigger workflow on pushes to main branch
 on:
   push:
     branches:
-      - main  # Run this workflow whenever you push to main
+      - main
 
+# Permissions for GitHub token
 permissions:
   contents: write
 
@@ -13,22 +15,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout code
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 2. Setup Node.js environment
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
+      # 3. Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
+      # 4. Build the Vite project
       - name: Build project
         run: npm run build
 
+      # 5. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          # Force push to overwrite gh-pages branch if needed
+          force_orphan: true
