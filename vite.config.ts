@@ -2,6 +2,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  base: "/portfolio-ai/", // <<-- Add this
   plugins: [react()],
+  base: "/portfolio-Ai/"  // <-- this is important
 });
