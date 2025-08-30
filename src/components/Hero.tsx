@@ -7,9 +7,10 @@ interface HeroProps {
   resumeUrl?: string;
 }
 
-const Hero: FC<HeroProps> = ({ resumeUrl = '/ayush_chaubey_cv_compressed.pdf' }) => {
+const Hero: FC<HeroProps> = ({
+  resumeUrl = import.meta.env.BASE_URL + 'ayush_chaubey_cv_compressed.pdf',
+}) => {
   const handleOpenPdf = () => {
-    // Open PDF in a new tab
     const newWindow = window.open(resumeUrl, '_blank');
     if (newWindow) newWindow.focus();
   };
