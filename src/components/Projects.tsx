@@ -20,7 +20,7 @@ const Projects = () => {
       technologies: ["Python", "Machine Learning", "Analytics", "Forecasting", "Research"],
       icon: <TrendingUp className="text-purple-600" size={24} />,
       github: "#",
-      demo: "#",
+      demo: "https://journals.mriindia.com/index.php/ijeecs/article/view/230", // ✅ Fixed
       featured: true
     },
     {
@@ -33,7 +33,6 @@ const Projects = () => {
       demo: "#",
       featured: false
     },
-   
   ];
 
   return (
@@ -107,6 +106,8 @@ const Projects = () => {
                 <div className="flex gap-4">
                   <a 
                     href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
                   >
                     <Github size={20} />
@@ -114,6 +115,8 @@ const Projects = () => {
                   </a>
                   <a 
                     href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
                   >
                     <ExternalLink size={20} />

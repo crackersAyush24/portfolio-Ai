@@ -10,7 +10,7 @@ const Experience = () => {
       period: "Aug 2024 - February 2025",
       description: [
         "Processed candidate and job data to improve job matching and support decision-making processes",
-        "Improved matching accuracy by 30% using machine learning models and predictive analytics",
+        "Improved matching accuracy by  using machine learning models and predictive analytics",
         "Built interactive dashboards with Excel & Power BI, reducing reporting time by 40%",
         "Automated candidate screening with predictive models, saving 200+ hours monthly",
         "Collaborated across HR, recruitment, and sales teams, impacting 5 departments"
@@ -21,7 +21,7 @@ const Experience = () => {
       title: "Computer Engineering Student",
       company: "University of Mumbai",
       location: "Mumbai, India",
-      period: "2020 - 2024",
+      period: "2021 - 2025",
       description: [
         "Achieved CGPA of 8.67 in Computer Engineering with Rev. 2016 curriculum",
         "Strong foundation in Mathematics & Algorithms (graph theory, set theory, automata)",
@@ -35,7 +35,7 @@ const Experience = () => {
       title: "AI/ML Research & Development",
       company: "Personal Projects",
       location: "Mumbai, India",
-      period: "2022 - Present",
+      period: "2024 - 2025",
       description: [
         "Researched Deep Learning Architectures including CNNs, RNNs, LSTMs, and GANs",
         "Built AI-powered applications for HR-tech, real estate analysis, and social media analytics",

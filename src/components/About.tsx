@@ -7,7 +7,7 @@ const About = () => {
     {
       icon: <Brain className="text-blue-600" size={32} />,
       title: "AI Research",
-      description: "5+ years developing neural networks and machine learning algorithms"
+      description: "A years of developing neural networks and machine learning algorithms"
     },
     {
       icon: <Code className="text-purple-600" size={32} />,
@@ -50,7 +50,7 @@ const About = () => {
               AI solutions for HR-tech and business intelligence.
             </p>
             <p className="text-gray-600 text-lg leading-relaxed mb-4">
-              At Jobclassify, I've improved job matching accuracy by 30% using machine learning models 
+              At Jobclassify, I've improved job matching accuracy by  using machine learning models 
               and automated candidate screening processes, saving 200+ hours monthly. I believe in 
               leveraging AI to streamline business processes and create meaningful impact.
             </p>
@@ -77,7 +77,7 @@ const About = () => {
               </li>
               <li className="flex items-center text-gray-700">
                 <span className="w-2 h-2 bg-orange-600 rounded-full mr-3"></span>
-                30% improvement in ML model accuracy
+                 improvement in ML model accuracy
               </li>
             </ul>
           </div>
