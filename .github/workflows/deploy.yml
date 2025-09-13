@@ -3,7 +3,8 @@ name: Deploy Vite React App to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - main   # redeploy every time you push to main
+  workflow_dispatch:   # also allow manual deploys from GitHub UI
 
 permissions:
   contents: write
@@ -26,6 +27,10 @@ jobs:
 
       - name: Build project
         run: npm run build
+
+      # Ensure the CV file is included in deployment
+      - name: Verify CV file
+        run: ls -lh public/ | grep "ayush_chaubey_cv_compressed.pdf"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
