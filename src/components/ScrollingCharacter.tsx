@@ -13,7 +13,9 @@ const ScrollingCharacter = () => {
     { id: 'skills', icon: Code, colorFrom: '#22C55E', colorTo: '#14B8A6', name: 'Skills' },
     { id: 'projects', icon: Zap, colorFrom: '#F97316', colorTo: '#EF4444', name: 'Projects' },
     { id: 'experience', icon: Briefcase, colorFrom: '#6366F1', colorTo: '#A78BFA', name: 'Experience' },
-    { id: 'contact', icon: Mail, colorFrom: '#EC4899', colorTo: '#F43F5E', name: 'Contact' }
+    { id: 'contact', icon: Mail, colorFrom: '#EC4899', colorTo: '#F43F5E', name: 'Contact' },
+    { id: 'updates', icon: Zap, colorFrom: '#F97316', colorTo: '#EF4444', name: 'Ongoing' }
+
   ];
 
   useEffect(() => {
@@ -57,12 +59,12 @@ const ScrollingCharacter = () => {
 
   const CurrentIcon = sections[currentSection]?.icon || User;
   const { colorFrom, colorTo } = sections[currentSection] || { colorFrom: '#3B82F6', colorTo: '#06B6D4' };
-
   const particles = Array.from({ length: 8 });
 
   return (
-    <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 pointer-events-none">
-      <div className="relative">
+    <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40">
+      {/* Robot & particles in a pointer-events-none wrapper so they don't block UI */}
+      <div className="pointer-events-none relative">
         {/* Scroll Progress */}
         <div className="absolute right-20 top-0 w-1 h-80 bg-gray-200/50 rounded-full overflow-hidden backdrop-blur-sm">
           <motion.div
@@ -104,11 +106,9 @@ const ScrollingCharacter = () => {
               <CurrentIcon size={24} className="text-white" />
             </div>
 
-            {/* Arms */}
+            {/* Arms & Legs */}
             <div className="absolute -left-1 top-4 w-2 h-6 bg-gray-700 rounded-full"></div>
             <div className="absolute -right-1 top-4 w-2 h-6 bg-gray-700 rounded-full"></div>
-
-            {/* Legs */}
             <div className="absolute -bottom-1 left-2 w-1.5 h-3 bg-gray-700 rounded-b-full"></div>
             <div className="absolute -bottom-1 right-2 w-1.5 h-3 bg-gray-700 rounded-b-full"></div>
 
@@ -124,7 +124,7 @@ const ScrollingCharacter = () => {
           </motion.div>
 
           {/* Floating Data Particles */}
-          <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0">
             {particles.map((_, i) => (
               <div
                 key={i}
@@ -148,7 +148,7 @@ const ScrollingCharacter = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.3 }}
-              className="absolute right-24 top-1/2 transform -translate-y-1/2 bg-gray-900/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-xl border border-cyan-400/30 flex items-center gap-2"
+              className="absolute right-24 top-1/2 transform -translate-y-1/2 bg-gray-900/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-xl border border-cyan-400/30 flex items-center gap-2 pointer-events-auto"
             >
               <Bot size={14} className="text-cyan-400" />
               <span className="text-sm font-bold text-white">{sections[currentSection]?.name}</span>
