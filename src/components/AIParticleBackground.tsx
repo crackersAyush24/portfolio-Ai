@@ -32,14 +32,13 @@ const AIParticleBackground = () => {
         vy: (Math.random() - 0.5) * 0.5,
         size: Math.random() * 2 + 1,
         opacity: Math.random() * 0.5 + 0.2,
-        hue: Math.random() * 60 + 200 // Blue to purple range
+        hue: Math.random() * 60 + 200, // Blue to purple range
       });
     }
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Update and draw particles
       particles.forEach((particle, i) => {
         particle.x += particle.vx;
         particle.y += particle.vy;

@@ -19,9 +19,11 @@ const Header = () => {
     { href: '#skills', label: 'Skills' },
     { href: '#projects', label: 'Projects' },
     { href: '#experience', label: 'Experience' },
-    { href:"#updates" , label:'Ongoing'},
+    { href: '#certificates', label: 'Certificate' }, 
+    { href: '#updates', label: 'Ongoing' },
     { href: '#contact', label: 'Contact' },
   ];
+  
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);

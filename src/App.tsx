@@ -10,6 +10,7 @@ import ScrollingCharacter from './components/ScrollingCharacter';
 import AIParticleBackground from './components/AIParticleBackground';
 import AyushChatbot from './components/AyushChatbot'; // 👈 Import your chatbot
 import Updates from './components/update.tsx';
+import Certificates  from './components/Certificates.tsx';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Skills />
         <Projects />
         <Experience />
+        <Certificates /> 
         <Updates /> 
         <Contact />
       </main>

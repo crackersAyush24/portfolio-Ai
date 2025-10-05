@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
-import { User, Zap, Code, Brain, Mail, Briefcase, Bot } from 'lucide-react';
+import { User, Zap, Code, Brain,Book, Mail, Briefcase, Bot } from 'lucide-react';
 
 const ScrollingCharacter = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -14,6 +14,7 @@ const ScrollingCharacter = () => {
     { id: 'projects', icon: Zap, colorFrom: '#F97316', colorTo: '#EF4444', name: 'Projects' },
     { id: 'experience', icon: Briefcase, colorFrom: '#6366F1', colorTo: '#A78BFA', name: 'Experience' },
     { id: 'contact', icon: Mail, colorFrom: '#EC4899', colorTo: '#F43F5E', name: 'Contact' },
+    { id: 'certificates', icon: Book, colorFrom: '#8B5CF6', colorTo: '#EC4899', name: 'Certificates' },
     { id: 'updates', icon: Zap, colorFrom: '#F97316', colorTo: '#EF4444', name: 'Ongoing' }
 
   ];

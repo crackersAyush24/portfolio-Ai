@@ -1,59 +1,59 @@
 import React from 'react';
-import { ExternalLink, Github, Brain, Eye, MessageCircle, TrendingUp } from 'lucide-react';
+import { ExternalLink, Github, Brain, Eye, TrendingUp } from 'lucide-react';
 
 const Projects = () => {
   const projects = [
     {
-      title: "AI-Powered Resume Ranking & Job Matching App",
-      description: "Built comprehensive HR-tech solution with resume parsing, job matching, candidate ranking, and interview scheduling. Extended to React Native mobile version with database integration.",
+      title: "Deep Fake Detection",
+      description: "Built a deepfake detection pipeline for images, videos, and real-time. Used MTCNN + CV for face detection, probability scoring, and annotated outputs. Developed Streamlit UI & Flask API for real-time use.",
       image: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=600",
-      technologies: ["Python", "Streamlit", "React Native", "Machine Learning", "NLP"],
+      technologies: ["Python", "OpenCV", "Streamlit", "Flask", "TensorFlow/PyTorch"],
       icon: <Brain className="text-blue-600" size={24} />,
       github: "#",
       demo: "#",
       featured: true
     },
     {
-      title: "Foresight Realty - AI Real Estate Framework",
-      description: "Research project analyzing properties with AI integration. Features location analytics, price forecasting, and investment scoring for real estate investment decisions.",
-      image: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=600",
-      technologies: ["Python", "Machine Learning", "Analytics", "Forecasting", "Research"],
-      icon: <TrendingUp className="text-purple-600" size={24} />,
-      github: "#",
-      demo: "https://journals.mriindia.com/index.php/ijeecs/article/view/230",
-      featured: true
-    },
-    {
-      title: "Social Media Analytics Toolkit",
-      description: "Built prototypes with Google Trends, Trendsmap, and Tweepsmap integration. Focused on location analytics, search engine analytics, and SEO analysis for business insights.",
+      title: "Delivery Driver Accident Risk Simulator",
+      description: "Developed a Streamlit-based ML app to predict accident risk for delivery drivers based on factors like driving hours, weather, fatigue, and route type. Implemented data preprocessing, feature engineering, and visualized results with Plotly.",
       image: "https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=600",
-      technologies: ["Python", "Analytics APIs", "SEO Tools", "Data Visualization", "Research"],
+      technologies: ["Python", "Streamlit", "Plotly", "Machine Learning", "Data Analysis"],
       icon: <Eye className="text-teal-600" size={24} />,
       github: "#",
       demo: "#",
-      featured: false
+      featured: true
     },
-   
+    {
+      title: "Movie Revenue Prediction",
+      description: "Built a machine learning model and Streamlit app to predict a movie’s box-office revenue using features like budget, runtime, genre, cast popularity, and production company. Applied regression algorithms including Linear Regression, Random Forest, and XGBoost.",
+      image: "https://images.pexels.com/photos/3183144/pexels-photo-3183144.jpeg?auto=compress&cs=tinysrgb&w=600",
+      technologies: ["Python", "Streamlit", "Machine Learning", "Regression", "Data Analysis"],
+      icon: <TrendingUp className="text-purple-600" size={24} />,
+      github: "#",
+      demo: "#",
+      featured: true
+    },
+    {
+      title: "Foresight Realty - Predicting Price",
+      description: "Worked as Project Leader to build a ML model predicting real estate prices based on features like location, size, and amenities. Used regression techniques for price forecasting and deployed with Flask for real-time predictions.",
+      image: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=600",
+      technologies: ["Python", "Flask", "Machine Learning", "Regression", "Real Estate Analytics"],
+      icon: <TrendingUp className="text-purple-600" size={24} />,
+      github: "#",
+      demo: "#",
+      featured: true
+    }
   ];
 
   return (
     <section id="projects" className="py-20 bg-white relative overflow-hidden">
-      {/* Floating AI Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-4 h-4 bg-blue-500 rounded-full neural-pulse"></div>
-        <div className="absolute top-40 right-20 w-6 h-6 bg-purple-500 rounded-full neural-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-40 left-20 w-3 h-3 bg-teal-500 rounded-full neural-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-20 right-10 w-5 h-5 bg-orange-500 rounded-full neural-pulse" style={{ animationDelay: '0.5s' }}></div>
-      </div>
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 relative z-10">
             Featured Projects
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto relative z-10">
-            A showcase of AI solutions that have made real-world impact, 
-            from healthcare to autonomous systems.
+            A showcase of AI & ML projects demonstrating real-world impact and innovation.
           </p>
         </div>
 
