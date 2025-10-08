@@ -9,7 +9,7 @@ const Projects = () => {
       image: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=600",
       technologies: ["Python", "OpenCV", "Streamlit", "Flask", "TensorFlow/PyTorch"],
       icon: <Brain className="text-blue-600" size={24} />,
-      github: "#",
+      github: "https://github.com/crackersAyush24/deepfake-prototype",
       demo: "#",
       featured: true
     },
@@ -25,7 +25,7 @@ const Projects = () => {
       image: "https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=600",
       technologies: ["Python", "Streamlit", "Plotly", "Deep-Learning"," TensorFlow"," Keras", "NumPy", "Matplotlib"],
       icon: <Eye className="text-teal-600" size={24} />,
-      github: "#",
+      github: "https://github.com/crackersAyush24/mnist_streamlit_app",
       demo: "#",
       featured: true
     },
@@ -35,7 +35,7 @@ const Projects = () => {
       image: "https://images.pexels.com/photos/3183144/pexels-photo-3183144.jpeg?auto=compress&cs=tinysrgb&w=600",
       technologies: ["Python", "Streamlit", "Machine Learning", "Regression", "Data Analysis"],
       icon: <TrendingUp className="text-purple-600" size={24} />,
-      github: "#",
+      github: "https://github.com/crackersAyush24/Movie_revenue_prediction",
       demo: "#",
       featured: true
     },
@@ -46,7 +46,7 @@ const Projects = () => {
       technologies: ["Python", "Flask", "Machine Learning", "Regression", "Real Estate Analytics"],
       icon: <TrendingUp className="text-purple-600" size={24} />,
       github: "#",
-      demo: "#",
+      demo: "https://journals.mriindia.com/index.php/ijeecs/article/view/230",
       featured: true
     }
   ];
