@@ -14,10 +14,16 @@ const Projects = () => {
       featured: true
     },
     {
-      title: "Delivery Driver Accident Risk Simulator",
-      description: "Developed a Streamlit-based ML app to predict accident risk for delivery drivers based on factors like driving hours, weather, fatigue, and route type. Implemented data preprocessing, feature engineering, and visualized results with Plotly.",
+      title: "Handwritten Digit Classification using Keras",
+      description: (
+        <>
+          Train a deep neural network to recognize handwritten digits.<br />
+          Developed and trained a deep neural network using the Keras Sequential API to classify handwritten digits from the MNIST dataset.<br />
+          Implemented ReLU and Softmax activation functions, optimized with Adam and categorical cross-entropy loss, achieving ~98% accuracy on test data.
+        </>
+      ),      
       image: "https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=600",
-      technologies: ["Python", "Streamlit", "Plotly", "Machine Learning", "Data Analysis"],
+      technologies: ["Python", "Streamlit", "Plotly", "Deep-Learning"," TensorFlow"," Keras", "NumPy", "Matplotlib"],
       icon: <Eye className="text-teal-600" size={24} />,
       github: "#",
       demo: "#",
