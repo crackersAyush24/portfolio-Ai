@@ -4,12 +4,15 @@ import GlitchText from './GlitchText';
 import NeuralNetworkAnimation from './NeuralNetworkAnimation';
 
 interface HeroProps {
-  resumeUrl?: string;
+  resumeFile?: string;
 }
 
 const Hero: FC<HeroProps> = ({
-  resumeUrl = import.meta.env.BASE_URL + 'Ayush_chaubey_job1.pdf',
+  resumeFile = 'Ayush_chaubey_job1.pdf',
 }) => {
+  // Append timestamp to force cache busting
+  const resumeUrl = import.meta.env.BASE_URL + resumeFile + `?v=${Date.now()}`;
+
   const handleOpenPdf = () => {
     const newWindow = window.open(resumeUrl, '_blank');
     if (newWindow) newWindow.focus();
