@@ -17,13 +17,13 @@ const certificates = [
     image: "/certificates/ml_python.jpg",
     link: "#/home/crackersAyush24/portfolio-Ai/public/certificates/ml_python.jpg",
   },
-  /*{
+  {
     title: "Deep Learning Fundamentals",
     issuer: "Coursera",
-    date: "2024",
-    image: "/certificates/deep_learning.jpg",
+    date: "2025",
+    image: "/certificates/DL_Keras.PNG",
     link: "#",
-  },*/
+  },
   /*{
     title: "Python for Data Science",
     issuer: "IBM",
