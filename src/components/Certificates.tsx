@@ -18,11 +18,11 @@ const certificates = [
     link: "#/home/crackersAyush24/portfolio-Ai/public/certificates/ml_python.jpg",
   },
   {
-    title: "Deep Learning Fundamentals",
-    issuer: "Coursera",
+    title: "Introduction to Deep Learning & Neural Networks with Keras",
+    issuer: "IBMC",
     date: "2025",
     image: "/certificates/DL_Keras.PNG",
-    link: "#",
+    link: "https://coursera.org/verify/7GK7XJN5RYJS",
   },
   /*{
     title: "Python for Data Science",
