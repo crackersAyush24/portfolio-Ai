@@ -14,7 +14,7 @@ const certificates = [
     title: "Introduction to Deep Learning & Neural Networks with Keras",
     issuer: "IBM",
     date: "2025",
-    image: "/certificates/DL_Keras.PNG",
+    image: "/certificates/DL_KERAS.jpg",
     link: "https://coursera.org/verify/7GK7XJN5RYJS",
   },
 ];
@@ -27,6 +27,7 @@ const Certificates: React.FC = () => {
   useEffect(() => {
     const scrollElement = scrollContainer.current;
     if (!scrollElement) return;
+
     let scrollSpeed = 1;
     let animationFrame: number;
 
@@ -70,7 +71,7 @@ const Certificates: React.FC = () => {
           <motion.div
             key={index}
             whileHover={{ scale: 1.05 }}
-            className="flex-shrink-0 w-96 bg-white/70 backdrop-blur-lg rounded-3xl shadow-lg border border-white/30 cursor-pointer"
+            className="flex-shrink-0 w-96 bg-white/70 backdrop-blur-lg rounded-3xl shadow-lg border border-white/30 cursor-pointer overflow-hidden"
             style={{ scrollSnapAlign: "center" }}
             onClick={() => setSelectedCert(cert)}
           >
@@ -79,15 +80,16 @@ const Certificates: React.FC = () => {
               alt={cert.title}
               className="w-full h-64 object-cover rounded-t-3xl"
             />
-            <div className="p-6 flex flex-col justify-between h-40">
+            <div className="p-6 flex flex-col justify-between h-auto">
               <div>
-                <h3 className="font-bold text-lg text-gray-900 break-words">
+                <h3 className="font-bold text-lg text-gray-900 break-words leading-snug line-clamp-2">
                   {cert.title}
                 </h3>
                 <p className="text-gray-600 text-sm">{cert.issuer}</p>
                 <p className="text-gray-500 text-xs mt-1">{cert.date}</p>
               </div>
 
+              {/* View Certificate button on card */}
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -113,35 +115,40 @@ const Certificates: React.FC = () => {
             onClick={() => setSelectedCert(null)}
           >
             <motion.div
-              className="relative bg-white/90 rounded-2xl overflow-hidden shadow-2xl max-w-3xl w-full"
+              className="relative bg-white/90 rounded-2xl shadow-2xl max-w-3xl w-full flex flex-col max-h-[90vh] overflow-hidden"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
+              {/* Close button */}
               <button
                 onClick={() => setSelectedCert(null)}
                 className="absolute top-3 right-3 bg-gray-800/80 text-white p-2 rounded-full hover:bg-gray-900 transition"
               >
                 <X size={18} />
               </button>
+
+              {/* Image */}
               <img
                 src={selectedCert.image}
                 alt={selectedCert.title}
-                className="w-full h-auto object-contain"
+                className="w-full h-auto object-contain max-h-[50vh]"
               />
-              <div className="p-6 text-center">
-                <h3 className="font-bold text-xl text-gray-900">{selectedCert.title}</h3>
+
+              {/* Bottom info (scrollable if content too long) */}
+              <div className="p-6 text-center flex flex-col items-center overflow-y-auto max-h-[40vh]">
+                <h3 className="font-bold text-xl text-gray-900 break-words mb-2">
+                  {selectedCert.title}
+                </h3>
                 <p className="text-gray-600">{selectedCert.issuer}</p>
                 <p className="text-gray-500 text-sm mt-1">{selectedCert.date}</p>
-                <a
-                  href={selectedCert.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 mt-4 text-blue-600 hover:text-blue-800 font-medium"
+                <button
+                  onClick={() => window.open(selectedCert.link, "_blank")}
+                  className="mt-4 inline-flex items-center justify-center gap-2 bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition"
                 >
-                  <ExternalLink size={16} /> View on Portfolio
-                </a>
+                  <ExternalLink size={16} /> View Certificate
+                </button>
               </div>
             </motion.div>
           </motion.div>
