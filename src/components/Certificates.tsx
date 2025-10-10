@@ -15,7 +15,7 @@ const certificates = [
     issuer: "IBM",
     date: "2025",
     image: "/certificates/ml_python.jpg",
-    link: "#/home/crackersAyush24/portfolio-Ai/public/certificates/ml_python.jpg",
+    link: "https://www.coursera.org/account/accomplishments/records/38XZQDL3L042",
   },
   {
     title: "Introduction to Deep Learning & Neural Networks with Keras",
