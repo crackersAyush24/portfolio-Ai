@@ -1,15 +1,8 @@
-import React, { useRef, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Award } from "lucide-react";
+import React, { useRef, useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, ExternalLink } from "lucide-react";
 
 const certificates = [
-  /* {
-    title: "AI Professional Specialization",
-    issuer: "Coursera",
-    date: "Ongoing (2025)",
-    image: "/certificates/ai_professional.jpg",
-    link: "#",
-  },*/
   {
     title: "Machine Learning with Python",
     issuer: "IBM",
@@ -19,41 +12,27 @@ const certificates = [
   },
   {
     title: "Introduction to Deep Learning & Neural Networks with Keras",
-    issuer: "IBMC",
+    issuer: "IBM",
     date: "2025",
     image: "/certificates/DL_Keras.PNG",
     link: "https://coursera.org/verify/7GK7XJN5RYJS",
   },
-  /*{
-    title: "Python for Data Science",
-    issuer: "IBM",
-    date: "2023",
-    image: "/certificates/python_ds.jpg",
-    link: "#",
-  },*/
-  /*{
-    title: "Prompt Engineering Mastery",
-    issuer: "DeepLearning.AI",
-    date: "2025",
-    image: "/certificates/prompt_engineering.jpg",
-    link: "#",
-  },*/
 ];
 
 const Certificates: React.FC = () => {
   const scrollContainer = useRef<HTMLDivElement>(null);
+  const [selectedCert, setSelectedCert] = useState<null | typeof certificates[0]>(null);
 
-  // Auto-scroll effect
+  // Auto-scroll
   useEffect(() => {
     const scrollElement = scrollContainer.current;
     if (!scrollElement) return;
-
-    let scrollSpeed = 1; // px per frame
+    let scrollSpeed = 1;
     let animationFrame: number;
 
     const scroll = () => {
       if (scrollElement.scrollLeft + scrollElement.clientWidth >= scrollElement.scrollWidth) {
-        scrollElement.scrollLeft = 0; // reset to start
+        scrollElement.scrollLeft = 0;
       } else {
         scrollElement.scrollLeft += scrollSpeed;
       }
@@ -62,7 +41,6 @@ const Certificates: React.FC = () => {
 
     animationFrame = requestAnimationFrame(scroll);
 
-    // Pause on hover
     const handleMouseEnter = () => (scrollSpeed = 0);
     const handleMouseLeave = () => (scrollSpeed = 1);
 
@@ -77,55 +55,98 @@ const Certificates: React.FC = () => {
   }, []);
 
   return (
-    <section
-      id="certificates"
-      className="py-20 bg-gradient-to-br from-white via-blue-50 to-purple-50 relative overflow-hidden"
-    >
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Heading */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 flex justify-center items-center gap-3">
-            <Award className="text-blue-600" size={36} /> Certificates & Achievements
-          </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            A visual timeline of my professional growth and learning in AI, ML, and Data Science.
-          </p>
-        </div>
+    <section className="relative z-10 py-20 px-6 sm:px-10 lg:px-20">
+      <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-12">
+        Certificates & Achievements
+      </h2>
 
-        {/* Auto-Scrolling Carousel */}
-        <div
-          ref={scrollContainer}
-          className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
-          style={{
-            scrollSnapType: "x mandatory",
-            whiteSpace: "nowrap",
-          }}
-        >
-          {certificates.map((cert, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ scale: 1.07 }}
-              className="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer border border-gray-100"
-              style={{ scrollSnapAlign: "center" }}
-              onClick={() => window.open(cert.link, "_blank")}
-            >
-              <img
-                src={cert.image}
-                alt={cert.title}
-                className="w-full h-48 object-cover rounded-t-2xl"
-              />
-              <div className="p-4">
-                <h3 className="font-bold text-lg text-gray-900">{cert.title}</h3>
+      {/* Carousel */}
+      <div
+        ref={scrollContainer}
+        className="flex gap-8 overflow-x-auto scrollbar-hide scroll-smooth pb-6"
+        style={{ scrollSnapType: "x mandatory", whiteSpace: "nowrap" }}
+      >
+        {certificates.map((cert, index) => (
+          <motion.div
+            key={index}
+            whileHover={{ scale: 1.05 }}
+            className="flex-shrink-0 w-96 bg-white/70 backdrop-blur-lg rounded-3xl shadow-lg border border-white/30 cursor-pointer"
+            style={{ scrollSnapAlign: "center" }}
+            onClick={() => setSelectedCert(cert)}
+          >
+            <img
+              src={cert.image}
+              alt={cert.title}
+              className="w-full h-64 object-cover rounded-t-3xl"
+            />
+            <div className="p-6 flex flex-col justify-between h-40">
+              <div>
+                <h3 className="font-bold text-lg text-gray-900 break-words">
+                  {cert.title}
+                </h3>
                 <p className="text-gray-600 text-sm">{cert.issuer}</p>
                 <p className="text-gray-500 text-xs mt-1">{cert.date}</p>
               </div>
-            </motion.div>
-          ))}
-        </div>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(cert.link, "_blank");
+                }}
+                className="mt-4 flex items-center justify-center gap-2 bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition w-full"
+              >
+                <ExternalLink size={16} /> View Certificate
+              </button>
+            </div>
+          </motion.div>
+        ))}
       </div>
 
-      {/* Glowing gradient background */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-100/10 via-purple-100/10 to-transparent pointer-events-none animate-pulse" />
+      {/* Modal */}
+      <AnimatePresence>
+        {selectedCert && (
+          <motion.div
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center items-center z-50 px-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedCert(null)}
+          >
+            <motion.div
+              className="relative bg-white/90 rounded-2xl overflow-hidden shadow-2xl max-w-3xl w-full"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setSelectedCert(null)}
+                className="absolute top-3 right-3 bg-gray-800/80 text-white p-2 rounded-full hover:bg-gray-900 transition"
+              >
+                <X size={18} />
+              </button>
+              <img
+                src={selectedCert.image}
+                alt={selectedCert.title}
+                className="w-full h-auto object-contain"
+              />
+              <div className="p-6 text-center">
+                <h3 className="font-bold text-xl text-gray-900">{selectedCert.title}</h3>
+                <p className="text-gray-600">{selectedCert.issuer}</p>
+                <p className="text-gray-500 text-sm mt-1">{selectedCert.date}</p>
+                <a
+                  href={selectedCert.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 mt-4 text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  <ExternalLink size={16} /> View on Portfolio
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
