@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { motion, AnimatePresence, useMotionValue } from "framer-motion";
 import { X, ExternalLink } from "lucide-react";
 import AIParticleBackground from "./AIParticleBackground";
 
@@ -21,39 +21,35 @@ const certificates = [
 ];
 
 const Certificates: React.FC = () => {
-  const scrollContainer = useRef<HTMLDivElement>(null);
   const [selectedCert, setSelectedCert] = useState<null | typeof certificates[0]>(null);
+  const [centerIndex, setCenterIndex] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
 
-  // Auto-scroll
-  useEffect(() => {
-    const scrollElement = scrollContainer.current;
-    if (!scrollElement) return;
-
-    let scrollSpeed = 1;
-    let animationFrame: number;
-
-    const scroll = () => {
-      if (scrollElement.scrollLeft + scrollElement.clientWidth >= scrollElement.scrollWidth) {
-        scrollElement.scrollLeft = 0;
-      } else {
-        scrollElement.scrollLeft += scrollSpeed;
+  const updateCenter = () => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    const scrollLeft = carousel.scrollLeft;
+    let closestIndex = 0;
+    let minDiff = Infinity;
+    Array.from(carousel.children).forEach((child, idx) => {
+      const el = child as HTMLElement;
+      const diff = Math.abs(el.offsetLeft - scrollLeft - carousel.offsetWidth / 2 + el.offsetWidth / 2);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIndex = idx;
       }
-      animationFrame = requestAnimationFrame(scroll);
-    };
+    });
+    setCenterIndex(closestIndex);
+  };
 
-    animationFrame = requestAnimationFrame(scroll);
-    const handleMouseEnter = () => (scrollSpeed = 0);
-    const handleMouseLeave = () => (scrollSpeed = 1);
-
-    scrollElement.addEventListener("mouseenter", handleMouseEnter);
-    scrollElement.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      cancelAnimationFrame(animationFrame);
-      scrollElement.removeEventListener("mouseenter", handleMouseEnter);
-      scrollElement.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
+  const handleDragEnd = (_: any, info: any) => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    const newScroll = carousel.scrollLeft - info.offset.x;
+    carousel.scrollTo({ left: newScroll, behavior: "smooth" });
+    setTimeout(updateCenter, 100);
+  };
 
   return (
     <section className="relative z-10 py-20 px-4 sm:px-8 lg:px-20 overflow-hidden">
@@ -66,58 +62,71 @@ const Certificates: React.FC = () => {
         Certificates & Achievements
       </h2>
 
-      {/* Scrollable Carousel */}
-      <div
-        ref={scrollContainer}
-        className="flex gap-8 overflow-x-auto scrollbar-hide scroll-smooth pb-8"
-        style={{ scrollSnapType: "x mandatory", whiteSpace: "nowrap" }}
+      {/* 3D Swipeable Carousel */}
+      <motion.div
+        ref={carouselRef}
+        className="flex gap-8 overflow-x-auto scrollbar-hide scroll-smooth pb-8 perspective-1000"
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.2}
+        style={{ x }}
+        onDragEnd={handleDragEnd}
+        onScroll={updateCenter}
       >
-        {certificates.map((cert, index) => (
-          <motion.div
-            key={index}
-            whileHover={{ scale: 1.07, rotateY: 4, rotateX: -2 }}
-            transition={{ type: "spring", stiffness: 180, damping: 15 }}
-            className="flex-shrink-0 w-72 sm:w-80 md:w-96 bg-white dark:bg-gray-800 rounded-3xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden cursor-pointer transform-gpu hover:shadow-2xl hover:-translate-y-2"
-            style={{ scrollSnapAlign: "center", transformStyle: "preserve-3d" }}
-            onClick={() => setSelectedCert(cert)}
-          >
-            {/* Certificate Image */}
-            <div className="relative">
-              <img
-                src={cert.image}
-                alt={cert.title}
-                className="w-full h-56 sm:h-64 object-cover"
-              />
-              {/* Gradient overlay for readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-t-3xl" />
-            </div>
+        {certificates.map((cert, index) => {
+          const isCenter = index === centerIndex;
 
-            {/* Card Info */}
-            <div className="p-6 flex flex-col justify-between h-auto">
-              <div>
-                <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100 leading-snug mb-1">
-                  {cert.title}
-                </h3>
-                <p className="text-gray-700 dark:text-gray-300 text-sm">{cert.issuer}</p>
-                <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">{cert.date}</p>
+          return (
+            <motion.div
+              key={index}
+              whileHover={{
+                scale: 1.07,
+                rotateY: isCenter ? 0 : index < centerIndex ? 15 : -15,
+                y: -6,
+                transition: { type: "spring", stiffness: 200, damping: 15 },
+              }}
+              whileTap={{ scale: 0.98, y: 0 }}
+              className={`flex-shrink-0 w-72 sm:w-80 md:w-96 bg-white dark:bg-gray-800 rounded-3xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden cursor-pointer`}
+              style={{
+                transform: `perspective(1000px) rotateY(${isCenter ? 0 : index < centerIndex ? 15 : -15}deg)`,
+              }}
+              onClick={() => setSelectedCert(cert)}
+            >
+              {/* Certificate Image */}
+              <div className="relative">
+                <img
+                  src={cert.image}
+                  alt={cert.title}
+                  className="w-full h-56 sm:h-64 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-t-3xl" />
               </div>
 
-              {/* View Certificate button */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.open(cert.link, "_blank");
-                }}
-                className="mt-4 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition"
-              >
-                <ExternalLink size={16} /> View Certificate
-              </button>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+              {/* Card Info */}
+              <div className="p-6 flex flex-col justify-between h-auto">
+                <div>
+                  <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100 leading-snug mb-1">
+                    {cert.title}
+                  </h3>
+                  <p className="text-gray-700 dark:text-gray-300 text-sm">{cert.issuer}</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">{cert.date}</p>
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(cert.link, "_blank");
+                  }}
+                  className="mt-4 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition"
+                >
+                  <ExternalLink size={16} /> View Certificate
+                </button>
+              </div>
+            </motion.div>
+          );
+        })}
+      </motion.div>
 
-      {/* Modal View */}
+      {/* Modal */}
       <AnimatePresence>
         {selectedCert && (
           <motion.div
@@ -136,7 +145,6 @@ const Certificates: React.FC = () => {
               onClick={(e) => e.stopPropagation()}
               style={{ transformStyle: "preserve-3d" }}
             >
-              {/* Close button */}
               <button
                 onClick={() => setSelectedCert(null)}
                 className="absolute top-3 right-3 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-900 transition"
@@ -144,17 +152,12 @@ const Certificates: React.FC = () => {
                 <X size={18} />
               </button>
 
-              {/* Certificate Image */}
-              <motion.img
+              <img
                 src={selectedCert.image}
                 alt={selectedCert.title}
                 className="w-full h-auto object-contain max-h-[55vh]"
-                initial={{ rotateX: 10, opacity: 0 }}
-                animate={{ rotateX: 0, opacity: 1 }}
-                transition={{ duration: 0.5 }}
               />
 
-              {/* Modal Info */}
               <div className="p-6 text-center flex flex-col items-center bg-gradient-to-t from-gray-50 dark:from-gray-800 to-transparent">
                 <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100 mb-2">
                   {selectedCert.title}
