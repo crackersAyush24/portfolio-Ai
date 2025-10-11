@@ -207,14 +207,17 @@ const AyushChatbot = () => {
       ).join('\n\n');
     }
 
-    // Basic Math (+, -, *, /)
-    if (/^\d+[\+\-\*\/]\d+$/.test(message.replace(/\s/g, ''))) {
+    // Basic Math (+, -, *, /, %, ^, powers)
+    const mathMatch = message.replace(/\s/g, '');
+    if (/^[\d\.\+\-\*\/%\^\(\)]+$/.test(mathMatch)) {
       try {
-        // Evaluate safely
-        const result = Function(`"use strict"; return (${message})`)();
-        return `The answer is: ${result}`;
+        // Convert ^ to ** for exponent
+        const expression = mathMatch.replace(/\^/g, '**');
+        // eslint-disable-next-line no-new-func
+        const result = Function(`"use strict"; return (${expression})`)();
+        if (result !== undefined) return `🧮 The answer is: ${result}`;
       } catch {
-        return "I couldn't solve that math problem. Please enter a valid one like 2+2 or 5*3.";
+        return "I couldn't solve that math problem. Please enter a valid one like 2+2, 5*3, or 2^3.";
       }
     }
 
@@ -234,6 +237,10 @@ const AyushChatbot = () => {
 
     setMessages(prev => [...prev, userMessage]);
     setInputText('');
+
+    // ✨ Extra line: add console log for fun
+    console.log("New message sent at:", new Date().toLocaleTimeString());
+
     setIsTyping(true);
 
     setTimeout(() => {
@@ -289,15 +296,20 @@ const AyushChatbot = () => {
                 <div
                   className={`max-w-[80%] p-3 rounded-2xl ${
                     message.isBot
-                      ? 'bg-gray-100 text-gray-800'
+                      ? 'bg-gray-100 text-gray-800 animate-gradient'
                       : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
                   } transform hover:scale-105 transition-all duration-200`}
                 >
-                  <div className="flex items-start gap-2">
-                    {message.isBot && <Bot size={16} className="text-blue-600 mt-1 flex-shrink-0" />}
-                    {!message.isBot && <User size={16} className="text-white mt-1 flex-shrink-0" />}
-                    <div className="whitespace-pre-line text-sm leading-relaxed">
-                      {message.text}
+                  <div className="flex flex-col gap-1">
+                    <div className="flex items-start gap-2">
+                      {message.isBot && <Bot size={16} className="text-blue-600 mt-1 flex-shrink-0" />}
+                      {!message.isBot && <User size={16} className="text-white mt-1 flex-shrink-0" />}
+                      <div className="whitespace-pre-line text-sm leading-relaxed">
+                        {message.text}
+                      </div>
+                    </div>
+                    <div className="text-[10px] opacity-50 text-right">
+                      {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </div>
                   </div>
                 </div>
@@ -332,6 +344,9 @@ const AyushChatbot = () => {
               onClick={handleSendMessage}
               className="bg-blue-600 hover:bg-blue-700 p-3 rounded-xl text-white transition-all duration-200"
             >
+              
+
+
               <Send size={20} />
             </button>
           </div>
