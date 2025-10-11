@@ -23,7 +23,7 @@ const Certificates: React.FC = () => {
   const scrollContainer = useRef<HTMLDivElement>(null);
   const [selectedCert, setSelectedCert] = useState<null | typeof certificates[0]>(null);
 
-  // Auto-scroll
+  // 🔄 Auto-scroll logic for smooth continuous movement
   useEffect(() => {
     const scrollElement = scrollContainer.current;
     if (!scrollElement) return;
@@ -56,46 +56,46 @@ const Certificates: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative z-10 py-20 px-6 sm:px-10 lg:px-20">
+    <section className="relative z-10 py-20 px-4 sm:px-8 lg:px-20">
       <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-12">
         Certificates & Achievements
       </h2>
 
-      {/* Carousel */}
+      {/* 🎞️ Responsive Scrollable Carousel */}
       <div
         ref={scrollContainer}
-        className="flex gap-8 overflow-x-auto scrollbar-hide scroll-smooth pb-6"
+        className="flex gap-6 sm:gap-8 overflow-x-auto scrollbar-hide scroll-smooth pb-6"
         style={{ scrollSnapType: "x mandatory", whiteSpace: "nowrap" }}
       >
         {certificates.map((cert, index) => (
           <motion.div
             key={index}
             whileHover={{ scale: 1.05 }}
-            className="flex-shrink-0 w-96 bg-white/70 backdrop-blur-lg rounded-3xl shadow-lg border border-white/30 cursor-pointer overflow-hidden"
+            className="flex-shrink-0 w-72 sm:w-80 md:w-96 bg-white/80 backdrop-blur-lg rounded-3xl shadow-lg border border-white/30 cursor-pointer overflow-hidden"
             style={{ scrollSnapAlign: "center" }}
             onClick={() => setSelectedCert(cert)}
           >
             <img
               src={cert.image}
               alt={cert.title}
-              className="w-full h-64 object-cover rounded-t-3xl"
+              className="w-full h-52 sm:h-64 object-cover rounded-t-3xl"
             />
-            <div className="p-6 flex flex-col justify-between h-auto">
+            <div className="p-4 sm:p-6 flex flex-col justify-between h-auto">
               <div>
-                <h3 className="font-bold text-lg text-gray-900 break-words leading-snug line-clamp-2">
+                <h3 className="font-bold text-base sm:text-lg text-gray-900 break-words leading-snug line-clamp-2">
                   {cert.title}
                 </h3>
                 <p className="text-gray-600 text-sm">{cert.issuer}</p>
                 <p className="text-gray-500 text-xs mt-1">{cert.date}</p>
               </div>
 
-              {/* View Certificate button on card */}
+              {/* 🔗 View Certificate button on card */}
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   window.open(cert.link, "_blank");
                 }}
-                className="mt-4 flex items-center justify-center gap-2 bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition w-full"
+                className="mt-3 flex items-center justify-center gap-2 bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition w-full text-sm sm:text-base"
               >
                 <ExternalLink size={16} /> View Certificate
               </button>
@@ -104,24 +104,24 @@ const Certificates: React.FC = () => {
         ))}
       </div>
 
-      {/* Modal */}
+      {/* 🪟 Modal for Enlarged Certificate */}
       <AnimatePresence>
         {selectedCert && (
           <motion.div
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center items-center z-50 px-4"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex justify-center items-center z-50 px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedCert(null)}
           >
             <motion.div
-              className="relative bg-white/90 rounded-2xl shadow-2xl max-w-3xl w-full flex flex-col max-h-[90vh] overflow-hidden"
+              className="relative bg-white/95 rounded-2xl shadow-2xl max-w-3xl w-full flex flex-col max-h-[90vh] overflow-hidden"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close button */}
+              {/* ❌ Close button */}
               <button
                 onClick={() => setSelectedCert(null)}
                 className="absolute top-3 right-3 bg-gray-800/80 text-white p-2 rounded-full hover:bg-gray-900 transition"
@@ -129,23 +129,25 @@ const Certificates: React.FC = () => {
                 <X size={18} />
               </button>
 
-              {/* Image */}
+              {/* 🖼️ Certificate Image */}
               <img
                 src={selectedCert.image}
                 alt={selectedCert.title}
-                className="w-full h-auto object-contain max-h-[50vh]"
+                className="w-full h-auto object-contain max-h-[55vh]"
               />
 
-              {/* Bottom info (scrollable if content too long) */}
-              <div className="p-6 text-center flex flex-col items-center overflow-y-auto max-h-[40vh]">
+              {/* 📄 Certificate Details */}
+              <div className="p-6 text-center flex flex-col items-center overflow-y-auto max-h-[35vh]">
                 <h3 className="font-bold text-xl text-gray-900 break-words mb-2">
                   {selectedCert.title}
                 </h3>
                 <p className="text-gray-600">{selectedCert.issuer}</p>
                 <p className="text-gray-500 text-sm mt-1">{selectedCert.date}</p>
+
+                {/* 🔗 Always show View Certificate button inside modal */}
                 <button
                   onClick={() => window.open(selectedCert.link, "_blank")}
-                  className="mt-4 inline-flex items-center justify-center gap-2 bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition"
+                  className="mt-4 inline-flex items-center justify-center gap-2 bg-blue-600 text-white py-2 px-5 rounded-xl hover:bg-blue-700 transition text-sm sm:text-base"
                 >
                   <ExternalLink size={16} /> View Certificate
                 </button>
