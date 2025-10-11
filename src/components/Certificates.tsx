@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue } from "framer-motion";
-import { X, ExternalLink } from "lucide-react";
+import { X, ExternalLink, Bot } from "lucide-react";
 import AIParticleBackground from "./AIParticleBackground";
 
 const certificates = [
@@ -18,9 +18,14 @@ const certificates = [
     image: "/certificates/DL_KERAS.jpg",
     link: "https://coursera.org/verify/7GK7XJN5RYJS",
   },
+  // Add more certificates as needed
 ];
 
-const Certificates: React.FC = () => {
+interface CertificatesProps {
+  onCenterChange?: (centerIndex: number) => void;
+}
+
+const Certificates: React.FC<CertificatesProps> = ({ onCenterChange }) => {
   const [selectedCert, setSelectedCert] = useState<null | typeof certificates[0]>(null);
   const [centerIndex, setCenterIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -34,13 +39,16 @@ const Certificates: React.FC = () => {
     let minDiff = Infinity;
     Array.from(carousel.children).forEach((child, idx) => {
       const el = child as HTMLElement;
-      const diff = Math.abs(el.offsetLeft - scrollLeft - carousel.offsetWidth / 2 + el.offsetWidth / 2);
+      const diff = Math.abs(
+        el.offsetLeft - scrollLeft - carousel.offsetWidth / 2 + el.offsetWidth / 2
+      );
       if (diff < minDiff) {
         minDiff = diff;
         closestIndex = idx;
       }
     });
     setCenterIndex(closestIndex);
+    if (onCenterChange) onCenterChange(closestIndex);
   };
 
   const handleDragEnd = (_: any, info: any) => {
@@ -51,8 +59,12 @@ const Certificates: React.FC = () => {
     setTimeout(updateCenter, 100);
   };
 
+  useEffect(() => {
+    updateCenter();
+  }, []);
+
   return (
-    <section className="relative z-10 py-20 px-4 sm:px-8 lg:px-20 overflow-hidden">
+    <section id="certificates" className="relative z-10 py-20 px-4 sm:px-8 lg:px-20 overflow-hidden">
       {/* Particle Background */}
       <div className="absolute inset-0 -z-10">
         <AIParticleBackground />
@@ -75,12 +87,11 @@ const Certificates: React.FC = () => {
       >
         {certificates.map((cert, index) => {
           const isCenter = index === centerIndex;
-
           return (
             <motion.div
               key={index}
               whileHover={{
-                scale: 1.07,
+                scale: 1.08,
                 rotateY: isCenter ? 0 : index < centerIndex ? 15 : -15,
                 y: -6,
                 transition: { type: "spring", stiffness: 200, damping: 15 },
