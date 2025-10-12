@@ -190,13 +190,7 @@ const ScrollingCharacter = () => {
             <div className="absolute -bottom-1 left-2 w-2 h-3 bg-gray-700 rounded-b-full animate-pulse-slow"></div>
             <div className="absolute -bottom-1 right-2 w-2 h-3 bg-gray-700 rounded-b-full animate-pulse-slow animation-delay-300"></div>
 
-            {/* Chest Panel */}
-            <motion.div
-              className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-6 md:w-8 h-4 md:h-6 rounded border border-white/30 flex items-center justify-center"
-              style={{ background: `linear-gradient(135deg, ${colorFrom}, ${colorTo})` }}
-              animate={{ scale: 1 + scrollProgress / 400 }}
-              transition={{ type: 'spring', stiffness: 120, damping: 10 }}
-            />
+          
 
             {/* Energy Glow */}
             <motion.div
