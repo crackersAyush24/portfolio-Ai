@@ -9,8 +9,8 @@ import Contact from './components/Contact';
 import ScrollingCharacter from './components/ScrollingCharacter';
 import AIParticleBackground from './components/AIParticleBackground';
 import AyushChatbot from './components/AyushChatbot';
-import Updates from './components/update.tsx';
-import Certificates from './components/Certificates.tsx';
+import Updates from './components/update';
+import Certificates from './components/Certificates';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false); // ✅ global dark mode state
@@ -18,7 +18,7 @@ function App() {
   return (
     <div className={`${darkMode ? 'dark bg-gray-900 text-gray-100' : 'bg-white text-gray-900'} min-h-screen transition-colors duration-500`}>
       {/* Background and floating characters */}
-      <AIParticleBackground />
+      <AIParticleBackground darkMode={darkMode} /> {/* Pass darkMode prop */}
       <ScrollingCharacter />
 
       {/* Header with toggle */}
@@ -31,7 +31,7 @@ function App() {
         <Skills darkMode={darkMode} />
         <Projects darkMode={darkMode} />
         <Experience darkMode={darkMode} />
-        <Certificates darkMode={darkMode} />
+        <Certificates darkMode={darkMode} /> {/* darkMode prop passed */}
         <Updates darkMode={darkMode} />
         <Contact darkMode={darkMode} />
       </main>
