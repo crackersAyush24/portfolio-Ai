@@ -94,7 +94,7 @@ const Hero: FC<HeroProps> = ({
               title="Send Email"
               className="text-gray-600 hover:text-blue-600 transform hover:scale-110 hover:rotateY-12 hover:-translate-y-1 transition-all duration-300"
             >
-              <Mail size={28} />
+              <Mail size={28} /> 
             </a>
           </div>
 
