@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Mail, Phone, MapPin, Send, Github, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Github, Linkedin, CheckCircle2, XCircle } from "lucide-react";
 import emailjs from "emailjs-com";
 
 interface ContactProps {
@@ -8,7 +8,7 @@ interface ContactProps {
 
 const Contact: React.FC<ContactProps> = ({ darkMode }) => {
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,13 +20,13 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
       .send("service_hwd0o6o", "template_zyqtmoq", formData, "ixi0_VHit6A0HL5Jq")
       .then(
         () => {
-          setStatus("✅ Message sent successfully!");
+          setStatus({ type: "success", message: "✅ Message sent successfully! I’ll reply soon." });
           setFormData({ name: "", email: "", subject: "", message: "" });
-          setTimeout(() => setStatus(""), 3000);
+          setTimeout(() => setStatus(null), 4000);
         },
         () => {
-          setStatus("❌ Failed to send message. Please try again.");
-          setTimeout(() => setStatus(""), 3000);
+          setStatus({ type: "error", message: "❌ Oops! Something went wrong. Please try again." });
+          setTimeout(() => setStatus(null), 4000);
         }
       );
   };
@@ -42,34 +42,22 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
     { icon: <Linkedin size={28} />, name: "LinkedIn", href: "https://www.linkedin.com/in/ayush-chaubey-90751422b", color: "hover:text-blue-600" },
   ];
 
-  const bgClass = darkMode ? "bg-gray-900 text-gray-100" : "bg-gradient-to-br from-blue-50 via-white to-purple-50 text-gray-900";
+  const bgClass = darkMode
+    ? "bg-gray-900 text-gray-100"
+    : "bg-gradient-to-br from-blue-50 via-white to-purple-50 text-gray-900";
   const cardBg = darkMode ? "bg-gray-800 border-gray-700 text-gray-100" : "bg-white border-gray-100 text-gray-900";
-  const inputBg = darkMode ? "bg-gray-700 text-gray-100 placeholder-gray-300 border-gray-600" : "bg-white text-gray-900 placeholder-gray-500 border-gray-300";
+  const inputBg = darkMode
+    ? "bg-gray-700 text-gray-100 placeholder-gray-300 border-gray-600"
+    : "bg-white text-gray-900 placeholder-gray-500 border-gray-300";
 
   return (
-    // ✅ ID added, z-index increased, and pointer-events fixed
-    <section
-      id="contact"
-      className={`${bgClass} relative z-20 min-h-screen transition-colors duration-500`}
-      style={{ pointerEvents: "auto" }}
-    >
+    <section id="contact" className={`${bgClass} min-h-screen transition-colors duration-500`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2
-            className={`text-4xl md:text-5xl font-bold mb-6 ${
-              darkMode ? "text-white" : "text-black"
-            }`}
-          >
-            Let's Connect
-          </h2>
-          <p
-            className={`text-xl max-w-3xl mx-auto ${
-              darkMode ? "text-gray-300" : "text-gray-600"
-            }`}
-          >
-            Ready to discuss your next AI project or collaboration? I'm always
-            excited to work on innovative solutions.
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Let's Connect</h2>
+          <p className={`text-xl max-w-3xl mx-auto ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
+            Ready to discuss your next AI project or collaboration? I'm always excited to work on innovative solutions.
           </p>
         </div>
 
@@ -98,8 +86,6 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                   <a
                     key={i}
                     href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className={`transition transform hover:scale-110 ${social.color}`}
                     aria-label={social.name}
                   >
@@ -165,20 +151,29 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
         </div>
       </div>
 
-      {/* Status message */}
+      {/* 🔔 Fancy Top-Right Toast */}
       {status && (
-        <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg animate-slide-up z-[9999]">
-          {status}
+        <div
+          className={`fixed top-6 right-6 px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 text-lg font-semibold backdrop-blur-md animate-slideIn z-50
+            ${status.type === "success"
+              ? "bg-green-500/90 text-white border border-green-300"
+              : "bg-red-500/90 text-white border border-red-300"
+            }`}
+        >
+          {status.type === "success" ? <CheckCircle2 size={26} /> : <XCircle size={26} />}
+          <span>{status.message}</span>
         </div>
       )}
 
       <style>
         {`
-          @keyframes slide-up {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+          @keyframes slideIn {
+            0% { opacity: 0; transform: translateX(40px) scale(0.95); }
+            100% { opacity: 1; transform: translateX(0) scale(1); }
           }
-          .animate-slide-up { animation: slide-up 0.5s ease-out; }
+          .animate-slideIn {
+            animation: slideIn 0.4s ease-out;
+          }
         `}
       </style>
     </section>
