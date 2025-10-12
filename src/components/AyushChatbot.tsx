@@ -136,7 +136,8 @@ const AyushChatbot = () => {
     ],
 
     // Personal Relationships
-    mehek: "Mehek is Ayush’s girlfriend, whom he loves most. She is a data scientist."
+    mehek: "Mehek is Ayush’s amazing girlfriend ❤️. She is a brilliant data scientist 👩‍💻 and also the most important person in Ayush’s life 💕. She’s not just his partner, she’s his owner 😉👑, his support, and his happiness. Every day with her is full of love, laughter, and inspiration 🌸✨."
+
   };
 
   const generateResponse = (userMessage: string): string => {
@@ -211,7 +212,6 @@ const AyushChatbot = () => {
     const mathMatch = message.replace(/\s/g, '');
     if (/^[\d\.\+\-\*\/%\^\(\)]+$/.test(mathMatch)) {
       try {
-        // Convert ^ to ** for exponent
         const expression = mathMatch.replace(/\^/g, '**');
         // eslint-disable-next-line no-new-func
         const result = Function(`"use strict"; return (${expression})`)();
@@ -237,8 +237,6 @@ const AyushChatbot = () => {
 
     setMessages(prev => [...prev, userMessage]);
     setInputText('');
-
-    // ✨ Extra line: add console log for fun
     console.log("New message sent at:", new Date().toLocaleTimeString());
 
     setIsTyping(true);
@@ -276,7 +274,7 @@ const AyushChatbot = () => {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-96 h-[500px] bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200/50 flex flex-col overflow-hidden transform hover:scale-105 transition-all duration-300 perspective-1000">
+        <div className="fixed bottom-24 right-6 z-50 w-96 h-[500px] bg-white/20 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/30 flex flex-col overflow-hidden transform hover:scale-105 transition-all duration-300 perspective-1000">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 flex items-center gap-3">
             <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
               <Bot size={20} />
@@ -296,7 +294,7 @@ const AyushChatbot = () => {
                 <div
                   className={`max-w-[80%] p-3 rounded-2xl ${
                     message.isBot
-                      ? 'bg-gray-100 text-gray-800 animate-gradient'
+                      ? 'bg-gray-100/50 text-gray-800 animate-gradient'
                       : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
                   } transform hover:scale-105 transition-all duration-200`}
                 >
@@ -318,7 +316,7 @@ const AyushChatbot = () => {
             
             {isTyping && (
               <div className="flex justify-start">
-                <div className="bg-gray-100 p-3 rounded-2xl flex items-center gap-2">
+                <div className="bg-gray-100/50 p-3 rounded-2xl flex items-center gap-2">
                   <Bot size={16} className="text-blue-600" />
                   <div className="flex gap-1">
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
@@ -332,23 +330,22 @@ const AyushChatbot = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="p-4 border-t border-gray-200 flex items-center gap-3">
+          <div className="p-4 border-t border-white/30 flex items-center gap-3">
             <textarea
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyDown={handleKeyPress}
               placeholder="Type a message..."
-              className="flex-1 p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none h-12"
+              className="flex-1 p-3 rounded-xl border border-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none h-12 bg-white/20"
             />
-            <button
-              onClick={handleSendMessage}
-              className="bg-blue-600 hover:bg-blue-700 p-3 rounded-xl text-white transition-all duration-200"
-            >
-              
+           <button
+  onClick={handleSendMessage}
+  className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white p-3 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center"
+>
+  <Send size={20} />
+</button>
 
-
-              <Send size={20} />
-            </button>
+             
           </div>
         </div>
       )}
