@@ -137,13 +137,11 @@ const AyushChatbot = () => {
 
     // Personal Relationships
     mehek: "Mehek is Ayush’s amazing girlfriend ❤️. She is a brilliant data scientist 👩‍💻 and also the most important person in Ayush’s life 💕. She’s not just his partner, she’s his owner 😉👑, his support, and his happiness. Every day with her is full of love, laughter, and inspiration 🌸✨."
-
   };
 
   const generateResponse = (userMessage: string): string => {
     const message = userMessage.toLowerCase().trim();
 
-    // Greetings
     if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
       const greetings = [
         "Hello! Great to meet you! I'm Ayush's AI assistant. How are you doing today?",
@@ -153,67 +151,56 @@ const AyushChatbot = () => {
       return greetings[Math.floor(Math.random() * greetings.length)];
     }
 
-    // About Ayush
     if (message.includes('about ayush') || message.includes('about him') || message.includes('who is ayush') || message === 'ayush') {
       return ayushKnowledgeBase.about;
     }
 
-    // Mehek
     if (message.includes('mehek') || message.includes('girlfriend')) {
       return ayushKnowledgeBase.mehek;
     }
 
-    // Personal Info
     if (message.includes('passport') || message.includes('dob') || message.includes('date of birth') || message.includes('nationality') || message.includes('place of birth') || message.includes('phone') || message.includes('email')) {
       return `Here are Ayush's personal details:\n• Passport: ${ayushKnowledgeBase.passport}\n• Date of Birth: ${ayushKnowledgeBase.dob}\n• Nationality: ${ayushKnowledgeBase.nationality}\n• Place of Birth: ${ayushKnowledgeBase.placeOfBirth}\n• Phone: ${ayushKnowledgeBase.phone}\n• Email: ${ayushKnowledgeBase.email}`;
     }
 
-    // Education
     if (message.includes('education') || message.includes('study') || message.includes('university')) {
       return ayushKnowledgeBase.education.map(edu => 
         `${edu.degree} from ${edu.institution} (${edu.duration}), CGPA: ${edu.cgpa || 'N/A'}\nCourses: ${edu.courses?.join(', ') || edu.field || ''}`
       ).join('\n\n');
     }
 
-    // Publications / Research papers
     if (message.includes('publication') || message.includes('paper') || message.includes('research')) {
       return ayushKnowledgeBase.publications.map(pub =>
         `${pub.title} (${pub.year})\nAuthors: ${pub.authors.join(', ')}\nJournal: ${pub.journal}\nSummary: ${pub.description}`
       ).join('\n\n');
     }
 
-    // Projects
     if (message.includes('project') || message.includes('portfolio') || message.includes('built')) {
       return ayushKnowledgeBase.projects.map(proj =>
         `${proj.name} (${proj.duration})\n• ${proj.description}`
       ).join('\n\n');
     }
 
-    // Ongoing Courses
     if (message.includes('course') || message.includes('learning') || message.includes('training')) {
       return ayushKnowledgeBase.ongoingCourses.map(course =>
         `${course.name} - ${course.platform} (${course.duration})\n${course.description}`
       ).join('\n\n');
     }
 
-    // Skills
     if (message.includes('skill') || message.includes('technology') || message.includes('programming')) {
       return `Ayush is highly skilled in: ${ayushKnowledgeBase.skills.join(', ')}`;
     }
 
-    // Experience
     if (message.includes('experience') || message.includes('work') || message.includes('job')) {
       return ayushKnowledgeBase.experience.map(exp =>
         `${exp.role} at ${exp.company} (${exp.duration})\n• ${exp.achievements.join('\n• ')}`
       ).join('\n\n');
     }
 
-    // Basic Math (+, -, *, /, %, ^, powers)
     const mathMatch = message.replace(/\s/g, '');
     if (/^[\d\.\+\-\*\/%\^\(\)]+$/.test(mathMatch)) {
       try {
         const expression = mathMatch.replace(/\^/g, '**');
-        // eslint-disable-next-line no-new-func
         const result = Function(`"use strict"; return (${expression})`)();
         if (result !== undefined) return `🧮 The answer is: ${result}`;
       } catch {
@@ -221,7 +208,6 @@ const AyushChatbot = () => {
       }
     }
 
-    // Default fallback
     return "I'm here to chat about Ayush, AI, projects, math, or anything else you'd like to know. Ask me anything!";
   };
 
@@ -274,14 +260,14 @@ const AyushChatbot = () => {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-96 h-[500px] bg-white/20 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/30 flex flex-col overflow-hidden transform hover:scale-105 transition-all duration-300 perspective-1000">
+        <div className="fixed bottom-24 right-6 z-50 w-96 max-w-[90vw] h-[500px] max-h-[80vh] bg-white/20 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/30 flex flex-col overflow-hidden transform hover:scale-105 transition-all duration-300 perspective-1000">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 flex items-center gap-3">
             <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
               <Bot size={20} />
             </div>
             <div>
-              <h3 className="font-bold">Ayush AI Assistant</h3>
-              <p className="text-sm opacity-90">Let's chat about anything! 💬</p>
+              <h3 className="font-bold text-sm sm:text-base">Ayush AI Assistant</h3>
+              <p className="text-xs sm:text-sm opacity-90">Let's chat about anything! 💬</p>
             </div>
           </div>
 
@@ -292,7 +278,7 @@ const AyushChatbot = () => {
                 className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
               >
                 <div
-                  className={`max-w-[80%] p-3 rounded-2xl ${
+                  className={`max-w-[80%] p-3 rounded-2xl text-sm sm:text-base ${
                     message.isBot
                       ? 'bg-gray-100/50 text-gray-800 animate-gradient'
                       : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
@@ -302,11 +288,11 @@ const AyushChatbot = () => {
                     <div className="flex items-start gap-2">
                       {message.isBot && <Bot size={16} className="text-blue-600 mt-1 flex-shrink-0" />}
                       {!message.isBot && <User size={16} className="text-white mt-1 flex-shrink-0" />}
-                      <div className="whitespace-pre-line text-sm leading-relaxed">
+                      <div className="whitespace-pre-line leading-relaxed">
                         {message.text}
                       </div>
                     </div>
-                    <div className="text-[10px] opacity-50 text-right">
+                    <div className="text-[10px] sm:text-[11px] opacity-50 text-right">
                       {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </div>
                   </div>
@@ -336,16 +322,14 @@ const AyushChatbot = () => {
               onChange={(e) => setInputText(e.target.value)}
               onKeyDown={handleKeyPress}
               placeholder="Type a message..."
-              className="flex-1 p-3 rounded-xl border border-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none h-12 bg-white/20"
+              className="flex-1 p-3 rounded-xl border border-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none h-12 sm:h-14 bg-white/20 text-sm sm:text-base"
             />
            <button
-  onClick={handleSendMessage}
-  className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white p-3 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center"
->
-  <Send size={20} />
-</button>
-
-             
+              onClick={handleSendMessage}
+              className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white p-3 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center"
+            >
+              <Send size={20} />
+            </button>
           </div>
         </div>
       )}
@@ -353,4 +337,4 @@ const AyushChatbot = () => {
   );
 };
 
-export default AyushChatbot; /*hello*/
+export default AyushChatbot;
