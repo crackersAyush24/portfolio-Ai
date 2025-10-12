@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 
-const AIParticleBackground = () => {
+interface Props {
+  darkMode: boolean;
+}
+
+const AIParticleBackground: React.FC<Props> = ({ darkMode }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -32,7 +36,7 @@ const AIParticleBackground = () => {
         vy: (Math.random() - 0.5) * 0.5,
         size: Math.random() * 2 + 1,
         opacity: Math.random() * 0.5 + 0.2,
-        hue: Math.random() * 60 + 200, // Blue to purple range
+        hue: darkMode ? Math.random() * 60 + 180 : Math.random() * 60 + 200, // Slightly different colors for dark/light
       });
     }
 
@@ -52,7 +56,7 @@ const AIParticleBackground = () => {
         // Draw particle
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${particle.hue}, 70%, 60%, ${particle.opacity})`;
+        ctx.fillStyle = `hsla(${particle.hue}, 70%, ${darkMode ? '70%' : '60%'}, ${particle.opacity})`;
         ctx.fill();
 
         // Draw connections
@@ -66,7 +70,7 @@ const AIParticleBackground = () => {
               ctx.beginPath();
               ctx.moveTo(particle.x, particle.y);
               ctx.lineTo(otherParticle.x, otherParticle.y);
-              ctx.strokeStyle = `hsla(${particle.hue}, 70%, 60%, ${0.1 * (1 - distance / 100)})`;
+              ctx.strokeStyle = `hsla(${particle.hue}, 70%, ${darkMode ? '70%' : '60%'}, ${0.1 * (1 - distance / 100)})`;
               ctx.lineWidth = 0.5;
               ctx.stroke();
             }
@@ -86,13 +90,13 @@ const AIParticleBackground = () => {
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [darkMode]);
 
   return (
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.3 }}
+      style={{ opacity: darkMode ? 0.2 : 0.3 }}
     />
   );
 };

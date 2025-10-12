@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -8,41 +8,46 @@ import Experience from './components/Experience';
 import Contact from './components/Contact';
 import ScrollingCharacter from './components/ScrollingCharacter';
 import AIParticleBackground from './components/AIParticleBackground';
-import AyushChatbot from './components/AyushChatbot'; // 👈 Import your chatbot
+import AyushChatbot from './components/AyushChatbot';
 import Updates from './components/update.tsx';
-import Certificates  from './components/Certificates.tsx';
+import Certificates from './components/Certificates.tsx';
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false); // ✅ global dark mode state
+
   return (
-    <div className="min-h-screen">
+    <div className={`${darkMode ? 'dark bg-gray-900 text-gray-100' : 'bg-white text-gray-900'} min-h-screen transition-colors duration-500`}>
+      {/* Background and floating characters */}
       <AIParticleBackground />
-      <Header />
       <ScrollingCharacter />
+
+      {/* Header with toggle */}
+      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+
+      {/* Main content */}
       <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Certificates /> 
-        <Updates /> 
-        <Contact />
+        <Hero darkMode={darkMode} />
+        <About darkMode={darkMode} />
+        <Skills darkMode={darkMode} />
+        <Projects darkMode={darkMode} />
+        <Experience darkMode={darkMode} />
+        <Certificates darkMode={darkMode} />
+        <Updates darkMode={darkMode} />
+        <Contact darkMode={darkMode} />
       </main>
 
       {/* Floating Chatbot */}
-      <AyushChatbot />  {/* 👈 Add chatbot here */}
+      <AyushChatbot />
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <p className="text-gray-300">
-              © 2024 Ayush Chaubey. Built with React, TypeScript, and Tailwind CSS.
-            </p>
-            <p className="text-gray-400 mt-2">
-              Crafted with ❤️ for data-driven innovation
-            </p>
-          </div>
+      <footer className={`${darkMode ? 'bg-gray-800 text-gray-200' : 'bg-gray-900 text-white'} py-8 transition-colors duration-500`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-gray-300 dark:text-gray-400">
+            © 2024 Ayush Chaubey. Built with React, TypeScript, and Tailwind CSS.
+          </p>
+          <p className="text-gray-400 dark:text-gray-500 mt-2">
+            Crafted with ❤️ for data-driven innovation
+          </p>
         </div>
       </footer>
     </div>
