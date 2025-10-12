@@ -47,13 +47,29 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
   const inputBg = darkMode ? "bg-gray-700 text-gray-100 placeholder-gray-300 border-gray-600" : "bg-white text-gray-900 placeholder-gray-500 border-gray-300";
 
   return (
-    <section className={`${bgClass} min-h-screen transition-colors duration-500`}>
+    // ✅ ID added, z-index increased, and pointer-events fixed
+    <section
+      id="contact"
+      className={`${bgClass} relative z-20 min-h-screen transition-colors duration-500`}
+      style={{ pointerEvents: "auto" }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Let's Connect</h2>
-          <p className={`text-xl max-w-3xl mx-auto ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            Ready to discuss your next AI project or collaboration? I'm always excited to work on innovative solutions.
+          <h2
+            className={`text-4xl md:text-5xl font-bold mb-6 ${
+              darkMode ? "text-white" : "text-black"
+            }`}
+          >
+            Let's Connect
+          </h2>
+          <p
+            className={`text-xl max-w-3xl mx-auto ${
+              darkMode ? "text-gray-300" : "text-gray-600"
+            }`}
+          >
+            Ready to discuss your next AI project or collaboration? I'm always
+            excited to work on innovative solutions.
           </p>
         </div>
 
@@ -79,7 +95,14 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
               <h4 className="text-xl font-bold mb-4">Follow Me</h4>
               <div className="flex gap-4">
                 {socialLinks.map((social, i) => (
-                  <a key={i} href={social.href} className={`transition transform hover:scale-110 ${social.color}`} aria-label={social.name}>
+                  <a
+                    key={i}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`transition transform hover:scale-110 ${social.color}`}
+                    aria-label={social.name}
+                  >
                     {social.icon}
                   </a>
                 ))}
@@ -144,7 +167,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
 
       {/* Status message */}
       {status && (
-        <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg animate-slide-up z-50">
+        <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg animate-slide-up z-[9999]">
           {status}
         </div>
       )}
