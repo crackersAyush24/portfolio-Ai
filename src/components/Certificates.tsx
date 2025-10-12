@@ -10,6 +10,8 @@ const certificates = [
     date: "2025",
     image: "/certificates/ml_python.jpg",
     link: "https://www.coursera.org/account/accomplishments/records/38XZQDL3L042",
+    description: "Comprehensive hands-on training in ML algorithms and Python.",
+    skills: ["Machine Learning", "Python", "Data Science"]
   },
   {
     title: "Introduction to Deep Learning & Neural Networks with Keras",
@@ -17,6 +19,8 @@ const certificates = [
     date: "2025",
     image: "/certificates/DL_KERAS.jpg",
     link: "https://coursera.org/verify/7GK7XJN5RYJS",
+    description: "Learned advanced neural architectures using Keras.",
+    skills: ["Deep Learning", "Neural Networks", "Keras"]
   },
   // Add more certificates as needed
 ];
@@ -65,16 +69,12 @@ const Certificates: React.FC<CertificatesProps> = ({ onCenterChange }) => {
 
   return (
     <section id="certificates" className="relative z-10 py-20 px-4 sm:px-8 lg:px-20 overflow-hidden">
-      {/* Particle Background */}
       <div className="absolute inset-0 -z-10">
         <AIParticleBackground />
       </div>
-
       <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 drop-shadow-md text-gray-900 dark:text-gray-100">
         Certificates & Achievements
       </h2>
-
-      {/* 3D Swipeable Carousel */}
       <motion.div
         ref={carouselRef}
         className="flex gap-8 overflow-x-auto scrollbar-hide scroll-smooth pb-8 perspective-1000"
@@ -103,7 +103,6 @@ const Certificates: React.FC<CertificatesProps> = ({ onCenterChange }) => {
               }}
               onClick={() => setSelectedCert(cert)}
             >
-              {/* Certificate Image */}
               <div className="relative">
                 <img
                   src={cert.image}
@@ -112,8 +111,6 @@ const Certificates: React.FC<CertificatesProps> = ({ onCenterChange }) => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-t-3xl" />
               </div>
-
-              {/* Card Info */}
               <div className="p-6 flex flex-col justify-between h-auto">
                 <div>
                   <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100 leading-snug mb-1">
@@ -121,6 +118,14 @@ const Certificates: React.FC<CertificatesProps> = ({ onCenterChange }) => {
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 text-sm">{cert.issuer}</p>
                   <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">{cert.date}</p>
+                  <p className="text-blue-700 dark:text-blue-400 text-sm mt-2">{cert.description}</p>
+                  <div className="flex gap-2 flex-wrap mt-2">
+                    {cert.skills && cert.skills.map(skill => (
+                      <span key={skill} className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs py-1 px-2 rounded">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
                 <button
                   onClick={(e) => {
@@ -136,8 +141,6 @@ const Certificates: React.FC<CertificatesProps> = ({ onCenterChange }) => {
           );
         })}
       </motion.div>
-
-      {/* Modal */}
       <AnimatePresence>
         {selectedCert && (
           <motion.div
@@ -162,19 +165,25 @@ const Certificates: React.FC<CertificatesProps> = ({ onCenterChange }) => {
               >
                 <X size={18} />
               </button>
-
               <img
                 src={selectedCert.image}
                 alt={selectedCert.title}
                 className="w-full h-auto object-contain max-h-[55vh]"
               />
-
               <div className="p-6 text-center flex flex-col items-center bg-gradient-to-t from-gray-50 dark:from-gray-800 to-transparent">
                 <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100 mb-2">
                   {selectedCert.title}
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300">{selectedCert.issuer}</p>
                 <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">{selectedCert.date}</p>
+                <p className="mt-3 text-blue-700 dark:text-blue-300">{selectedCert.description}</p>
+                <div className="flex gap-2 flex-wrap mt-2 mb-2">
+                  {selectedCert.skills && selectedCert.skills.map(skill => (
+                    <span key={skill} className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs py-1 px-2 rounded">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
                 <button
                   onClick={() => window.open(selectedCert.link, "_blank")}
                   className="mt-4 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-5 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition"

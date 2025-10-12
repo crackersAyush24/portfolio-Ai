@@ -87,9 +87,12 @@ const Hero: FC<HeroProps> = ({
             >
               <Linkedin size={28} />
             </a>
-            <a
-              href="mailto:chaubeyayush04@gmail.com"
-              className="text-gray-600 hover:text-blue-600 transform hover:scale-110 hover:rotateY-12 hover:-translate-y-1 transition-all duration-300 perspective-1000"
+            <a 
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=chaubeyayush04@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Send Email"
+              className="text-gray-600 hover:text-blue-600 transform hover:scale-110 hover:rotateY-12 hover:-translate-y-1 transition-all duration-300"
             >
               <Mail size={28} />
             </a>
