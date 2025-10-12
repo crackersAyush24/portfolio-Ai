@@ -11,7 +11,8 @@ const AIParticleBackground: React.FC<Props> = ({ darkMode }) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    // ✅ Make sure context supports alpha
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     canvas.width = window.innerWidth;
@@ -27,7 +28,6 @@ const AIParticleBackground: React.FC<Props> = ({ darkMode }) => {
       hue: number;
     }> = [];
 
-    // Create particles
     for (let i = 0; i < 100; i++) {
       particles.push({
         x: Math.random() * canvas.width,
@@ -36,18 +36,18 @@ const AIParticleBackground: React.FC<Props> = ({ darkMode }) => {
         vy: (Math.random() - 0.5) * 0.5,
         size: Math.random() * 2 + 1,
         opacity: Math.random() * 0.5 + 0.2,
-        hue: darkMode ? Math.random() * 60 + 180 : Math.random() * 60 + 200, // Slightly different colors for dark/light
+        hue: darkMode ? Math.random() * 60 + 180 : Math.random() * 60 + 200,
       });
     }
 
     const animate = () => {
+      // ✅ Clear canvas to transparent instead of white
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle, i) => {
         particle.x += particle.vx;
         particle.y += particle.vy;
 
-        // Wrap around edges
         if (particle.x < 0) particle.x = canvas.width;
         if (particle.x > canvas.width) particle.x = 0;
         if (particle.y < 0) particle.y = canvas.height;
@@ -56,7 +56,7 @@ const AIParticleBackground: React.FC<Props> = ({ darkMode }) => {
         // Draw particle
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${particle.hue}, 70%, ${darkMode ? '70%' : '60%'}, ${particle.opacity})`;
+        ctx.fillStyle = `hsla(${particle.hue}, 70%, 50%, ${particle.opacity})`; // ✅ use 50% lightness
         ctx.fill();
 
         // Draw connections
@@ -70,7 +70,7 @@ const AIParticleBackground: React.FC<Props> = ({ darkMode }) => {
               ctx.beginPath();
               ctx.moveTo(particle.x, particle.y);
               ctx.lineTo(otherParticle.x, otherParticle.y);
-              ctx.strokeStyle = `hsla(${particle.hue}, 70%, ${darkMode ? '70%' : '60%'}, ${0.1 * (1 - distance / 100)})`;
+              ctx.strokeStyle = `hsla(${particle.hue}, 70%, 50%, ${0.1 * (1 - distance / 100)})`;
               ctx.lineWidth = 0.5;
               ctx.stroke();
             }
@@ -96,7 +96,7 @@ const AIParticleBackground: React.FC<Props> = ({ darkMode }) => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: darkMode ? 0.2 : 0.3 }}
+      style={{ background: 'transparent', opacity: darkMode ? 0.2 : 0.3 }}
     />
   );
 };
