@@ -33,7 +33,7 @@ const certificates = [
     image: "/certificates/Deloite.jpg",
     link: "https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_68ed27764173ee1ef791b1dc_1760507596800_completion_certificate.pdf",
     description: "Completed a Deloitte job simulation involving data analysis and forensic technology ,2.Created a data dashboard using Tableau ,3.Used Excel to classify data and draw business conclusions",
-    skills: ["Deep Learning", "Neural Networks", "Keras"]
+    skills: ["DATA ANALYSIS","DATA MODELING","DATA VISUALIZATION TOOLS","SPREADSHEET SKILLS"]
   }
 ];
 
