@@ -68,8 +68,8 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
 
   return (
     <section
-      id="certificates" // ✅ For navigation to work
-      className="relative z-0 py-20 px-4 sm:px-8 lg:px-20 overflow-hidden"
+      id="certificates"
+      className="relative z-0 py-20 px-4 sm:px-8 lg:px-20 overflow-hidden scroll-smooth"
     >
       {/* ✅ Particle Background */}
       <AIParticleBackground darkMode={darkMode} />
@@ -81,23 +81,32 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
         } pointer-events-none z-0`}
       />
 
-      {/* Main Content */}
       <div className="relative z-10">
-        {/* Header */}
-        <h2
+        {/* Header with entry animation */}
+        <motion.h2
+          initial={{ opacity: 0, y: -40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
           className={`text-4xl md:text-5xl font-bold text-center mb-12 drop-shadow-md ${
             darkMode ? "text-white" : "text-black"
           }`}
         >
           Certificates & Achievements
-        </h2>
+        </motion.h2>
 
-        {/* ✅ Smooth Mobile Carousel (no lag) */}
-        <div
+        {/* ✅ Carousel with parallax scroll */}
+        <motion.div
           ref={carouselRef}
           onScroll={updateCenter}
           className="flex gap-8 overflow-x-auto scrollbar-hide scroll-smooth pb-8 perspective-1000 snap-x snap-mandatory"
-          style={{ WebkitOverflowScrolling: "touch" }}
+          style={{
+            WebkitOverflowScrolling: "touch",
+          }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: true }}
         >
           {certificates.map((cert, index) => {
             const isCenter = index === centerIndex;
@@ -115,8 +124,12 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
                   transition: { type: "spring", stiffness: 200, damping: 15 },
                 }}
                 whileTap={{ scale: 0.98, y: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.15 }}
+                viewport={{ once: true }}
                 className={`snap-center flex-shrink-0 w-72 sm:w-80 md:w-96 rounded-2xl shadow-lg border overflow-hidden cursor-pointer ${cardBg} ${
-                  isCenter ? "border-blue-500 dark:border-blue-400" : ""
+                  isCenter ? "border-blue-500 dark:border-blue-400 shadow-xl" : ""
                 }`}
                 style={{
                   transform: `perspective(1000px) rotateY(${
@@ -125,10 +138,12 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
                 }}
                 onClick={() => setSelectedCert(cert)}
               >
-                <img
+                <motion.img
                   src={cert.image}
                   alt={cert.title}
                   className="w-full h-56 sm:h-60 md:h-64 object-cover"
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ duration: 0.4 }}
                 />
 
                 <div className="p-4 flex flex-col gap-2">
@@ -157,7 +172,7 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
                       e.stopPropagation();
                       window.open(cert.link, "_blank");
                     }}
-                    className="mt-2 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-3 rounded-md shadow hover:scale-105 transition"
+                    className="mt-2 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-3 rounded-md shadow hover:scale-105 hover:shadow-lg transition"
                   >
                     <ExternalLink size={16} /> View
                   </button>
@@ -165,7 +180,7 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* ✅ Modal */}
         <AnimatePresence>
@@ -194,22 +209,27 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
                   <X size={18} />
                 </button>
 
-                <div className="w-full flex justify-center items-center p-3">
-                  <img
-                    src={selectedCert.image}
-                    alt={selectedCert.title}
-                    className="w-full h-auto object-contain rounded-xl max-h-[60vh]"
-                  />
-                </div>
+                <motion.img
+                  src={selectedCert.image}
+                  alt={selectedCert.title}
+                  className="w-full h-auto object-contain rounded-xl max-h-[60vh] p-3"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                />
 
                 <div className="p-5 sm:p-6 w-full text-center">
-                  <h3
+                  <motion.h3
                     className={`font-bold text-xl sm:text-2xl mb-2 ${
                       darkMode ? "text-white" : "text-black"
                     }`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
                   >
                     {selectedCert.title}
-                  </h3>
+                  </motion.h3>
+
                   <p className="text-blue-600 font-semibold mb-2">
                     {selectedCert.issuer}
                   </p>
@@ -230,8 +250,9 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
 
                   <div className="flex flex-wrap justify-center gap-2 mt-3 mb-4">
                     {selectedCert.skills.map((skill) => (
-                      <span
+                      <motion.span
                         key={skill}
+                        whileHover={{ scale: 1.05 }}
                         className={`text-xs sm:text-sm py-1 px-2 rounded ${
                           darkMode
                             ? "bg-gray-700 text-gray-300"
@@ -239,16 +260,17 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
                         }`}
                       >
                         {skill}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
 
-                  <button
+                  <motion.button
                     onClick={() => window.open(selectedCert.link, "_blank")}
-                    className="mt-2 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-5 sm:px-6 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition"
+                    whileHover={{ scale: 1.05 }}
+                    className="mt-2 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-5 sm:px-6 rounded-xl shadow-lg hover:shadow-xl transition"
                   >
                     <ExternalLink size={16} /> View Certificate
-                  </button>
+                  </motion.button>
                 </div>
               </motion.div>
             </motion.div>
