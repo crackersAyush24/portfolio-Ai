@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { motion, AnimatePresence, useMotionValue } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink } from "lucide-react";
 import AIParticleBackground from "./AIParticleBackground";
 
@@ -15,7 +15,7 @@ const certificates = [
     image: "/certificates/ml_python.jpg",
     link: "https://www.coursera.org/account/accomplishments/records/38XZQDL3L042",
     description: "Comprehensive hands-on training in ML algorithms and Python.",
-    skills: ["Machine Learning", "Python", "Data Science"]
+    skills: ["Machine Learning", "Python", "Data Science"],
   },
   {
     title: "Introduction to Deep Learning & Neural Networks with Keras",
@@ -24,7 +24,7 @@ const certificates = [
     image: "/certificates/DL_KERAS.jpg",
     link: "https://coursera.org/verify/7GK7XJN5RYJS",
     description: "Learned advanced neural architectures using Keras.",
-    skills: ["Deep Learning", "Neural Networks", "Keras"]
+    skills: ["Deep Learning", "Neural Networks", "Keras"],
   },
   {
     title: "Deloitte Australia's Data Analytics on Forage",
@@ -32,16 +32,16 @@ const certificates = [
     date: "2025",
     image: "/certificates/Deloite.jpg",
     link: "https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_68ed27764173ee1ef791b1dc_1760507596800_completion_certificate.pdf",
-    description: "Completed a Deloitte job simulation involving data analysis and forensic technology ,2.Created a data dashboard using Tableau ,3.Used Excel to classify data and draw business conclusions",
-    skills: ["DATA ANALYSIS","DATA MODELING","DATA VISUALIZATION TOOLS","SPREADSHEET SKILLS"]
-  }
+    description:
+      "Completed a Deloitte job simulation involving data analysis, forensic technology, Tableau dashboards, and Excel-based data classification.",
+    skills: ["Data Analysis", "Data Modeling", "Visualization Tools", "Excel"],
+  },
 ];
 
 const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
   const [selectedCert, setSelectedCert] = useState<null | typeof certificates[0]>(null);
   const [centerIndex, setCenterIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
 
   const updateCenter = () => {
     const carousel = carouselRef.current;
@@ -62,31 +62,26 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
     setCenterIndex(closestIndex);
   };
 
-  const handleDragEnd = (_: any, info: any) => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
-    const newScroll = carousel.scrollLeft - info.offset.x;
-    carousel.scrollTo({ left: newScroll, behavior: "smooth" });
-    setTimeout(updateCenter, 100);
-  };
-
   useEffect(() => {
     updateCenter();
   }, []);
 
   return (
-    <section className="relative z-0 py-20 px-4 sm:px-8 lg:px-20 overflow-hidden">
+    <section
+      id="certificates" // ✅ For navigation to work
+      className="relative z-0 py-20 px-4 sm:px-8 lg:px-20 overflow-hidden"
+    >
       {/* ✅ Particle Background */}
       <AIParticleBackground darkMode={darkMode} />
 
-      {/* Optional overlay to make text readable */}
+      {/* Overlay for contrast */}
       <div
         className={`absolute inset-0 ${
           darkMode ? "bg-gray-900/80" : "bg-white/20"
         } pointer-events-none z-0`}
       />
 
-      {/* Main content */}
+      {/* Main Content */}
       <div className="relative z-10">
         {/* Header */}
         <h2
@@ -97,16 +92,12 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
           Certificates & Achievements
         </h2>
 
-        {/* Carousel */}
-        <motion.div
+        {/* ✅ Smooth Mobile Carousel (no lag) */}
+        <div
           ref={carouselRef}
-          className="flex gap-8 overflow-x-auto scrollbar-hide scroll-smooth pb-8 perspective-1000"
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.2}
-          style={{ x }}
-          onDragEnd={handleDragEnd}
           onScroll={updateCenter}
+          className="flex gap-8 overflow-x-auto scrollbar-hide scroll-smooth pb-8 perspective-1000 snap-x snap-mandatory"
+          style={{ WebkitOverflowScrolling: "touch" }}
         >
           {certificates.map((cert, index) => {
             const isCenter = index === centerIndex;
@@ -124,7 +115,7 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
                   transition: { type: "spring", stiffness: 200, damping: 15 },
                 }}
                 whileTap={{ scale: 0.98, y: 0 }}
-                className={`flex-shrink-0 w-72 sm:w-80 md:w-96 rounded-2xl shadow-lg border overflow-hidden cursor-pointer ${cardBg} ${
+                className={`snap-center flex-shrink-0 w-72 sm:w-80 md:w-96 rounded-2xl shadow-lg border overflow-hidden cursor-pointer ${cardBg} ${
                   isCenter ? "border-blue-500 dark:border-blue-400" : ""
                 }`}
                 style={{
@@ -152,7 +143,9 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
                       <span
                         key={skill}
                         className={`text-xs py-1 px-2 rounded ${
-                          darkMode ? "bg-gray-700 text-gray-300" : "bg-gray-100 text-gray-700"
+                          darkMode
+                            ? "bg-gray-700 text-gray-300"
+                            : "bg-gray-100 text-gray-700"
                         }`}
                       >
                         {skill}
@@ -172,9 +165,9 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
               </motion.div>
             );
           })}
-        </motion.div>
+        </div>
 
-        {/* Modal */}
+        {/* ✅ Modal */}
         <AnimatePresence>
           {selectedCert && (
             <motion.div
@@ -210,14 +203,28 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
                 </div>
 
                 <div className="p-5 sm:p-6 w-full text-center">
-                  <h3 className={`font-bold text-xl sm:text-2xl mb-2 ${darkMode ? "text-white" : "text-black"}`}>
+                  <h3
+                    className={`font-bold text-xl sm:text-2xl mb-2 ${
+                      darkMode ? "text-white" : "text-black"
+                    }`}
+                  >
                     {selectedCert.title}
                   </h3>
-                  <p className="text-blue-600 font-semibold mb-2">{selectedCert.issuer}</p>
-                  <p className={`text-sm mb-2 ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
+                  <p className="text-blue-600 font-semibold mb-2">
+                    {selectedCert.issuer}
+                  </p>
+                  <p
+                    className={`text-sm mb-2 ${
+                      darkMode ? "text-gray-400" : "text-gray-500"
+                    }`}
+                  >
                     {selectedCert.date}
                   </p>
-                  <p className={`text-sm sm:text-base mb-3 ${darkMode ? "text-blue-400" : "text-blue-700"}`}>
+                  <p
+                    className={`text-sm sm:text-base mb-3 ${
+                      darkMode ? "text-blue-400" : "text-blue-700"
+                    }`}
+                  >
                     {selectedCert.description}
                   </p>
 
@@ -226,7 +233,9 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
                       <span
                         key={skill}
                         className={`text-xs sm:text-sm py-1 px-2 rounded ${
-                          darkMode ? "bg-gray-700 text-gray-300" : "bg-gray-100 text-gray-700"
+                          darkMode
+                            ? "bg-gray-700 text-gray-300"
+                            : "bg-gray-100 text-gray-700"
                         }`}
                       >
                         {skill}
