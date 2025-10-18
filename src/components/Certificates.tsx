@@ -42,10 +42,18 @@ const certificates = [
     date: "Apr 2023",
     image: "/certificates/nptel.jpg",
     link: "https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL23CS20S1448056604078404",
-    description: "12-week course completed with 71%, covering foundational Python, logic, and programming constructs.",
+    description: "12-week course completed with scoring 71% in offline exam center, covering foundational Python, logic, and programming constructs.",
     skills: ["Python", "Problem Solving", "Programming Fundamentals"],
   },
-  
+  {
+    title: "Python Certification Course",
+    issuer: "Programming Hub (Google Launchpad)",
+    date: "Sep 2023",
+    image: "/certificates/python.jpg",
+    link: "", 
+    description: "Gained knowledge of Python programming through Programming Hub's certification.",
+    skills: ["Python", "Programming"],
+  },
 ];
 
 const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
