@@ -36,6 +36,16 @@ const certificates = [
       "Completed a Deloitte job simulation involving data analysis, forensic technology, Tableau dashboards, and Excel-based data classification.",
     skills: ["Data Analysis", "Data Modeling", "Visualization Tools", "Excel"],
   },
+  {
+    title: "The Joy of Computing using Python",
+    issuer: "NPTEL | IIT Madras",
+    date: "Apr 2023",
+    image: "/certificates/nptel.jpg",
+    link: "https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL23CS20S1448056604078404",
+    description: "12-week course completed with 71%, covering foundational Python, logic, and programming constructs.",
+    skills: ["Python", "Problem Solving", "Programming Fundamentals"],
+  },
+  
 ];
 
 const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
