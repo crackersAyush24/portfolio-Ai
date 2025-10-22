@@ -79,7 +79,7 @@ const certificates = [
     issuer: "Udemy | Learn The Part Inc.",
     date: "Apr 2023",
     image: "/certificates/JAVA.jpg",
-    link: "",
+    link: "https://www.udemy.com/certificate/UC-92bb2e44-e195-47b4-bedd-036ce391999b/",
     description:
       "Completed a 29-hour Java bootcamp covering OOP concepts, data structures, and backend development with hands-on projects.",
     skills: ["Java", "OOP", "Backend Development"],
