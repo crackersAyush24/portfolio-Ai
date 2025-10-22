@@ -54,6 +54,16 @@ const certificates = [
     description: "Gained knowledge of Python programming through Programming Hub's certification.",
     skills: ["Python", "Programming"],
   },
+  {
+    title: "ChatGPT Intercollegiate Event",
+    issuer: "Shree L.R. Tiwari College of Engineering | CSI & AIML Club",
+    date: "Feb 2023",
+    image: "/certificates/AIML.jpg",
+    link: "",
+    description:
+      "Participated in an intercollegiate event focused on exploring ChatGPT’s applications in AI and software development.",
+    skills: ["Artificial Intelligence", "ChatGPT", "Event Participation"],
+  },
 ];
 
 const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
