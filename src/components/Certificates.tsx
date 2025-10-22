@@ -74,6 +74,16 @@ const certificates = [
       "Completed a 60-hour course and internship focused on Flutter app development, UI design, and mobile application deployment.",
     skills: ["Flutter", "Dart", "App Development", "UI Design"],
   },
+  {
+    title: "The Complete Java Development Bootcamp",
+    issuer: "Udemy | Learn The Part Inc.",
+    date: "Apr 2023",
+    image: "/certificates/JAVA.jpg",
+    link: "",
+    description:
+      "Completed a 29-hour Java bootcamp covering OOP concepts, data structures, and backend development with hands-on projects.",
+    skills: ["Java", "OOP", "Backend Development"],
+  },
 ];
 
 const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
