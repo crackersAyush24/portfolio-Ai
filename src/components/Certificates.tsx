@@ -64,6 +64,16 @@ const certificates = [
       "Participated in an intercollegiate event focused on exploring ChatGPT’s applications in AI and software development.",
     skills: ["Artificial Intelligence", "ChatGPT", "Event Participation"],
   },
+  {
+    title: "60 hrs Course and Internship in Flutter",
+    issuer: "Shree L.R. Tiwari College of Engineering",
+    date: "Nov 2023",
+    image: "/certificates/flutter.jpg",
+    link: "",
+    description:
+      "Completed a 60-hour course and internship focused on Flutter app development, UI design, and mobile application deployment.",
+    skills: ["Flutter", "Dart", "App Development", "UI Design"],
+  },
 ];
 
 const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
