@@ -9,27 +9,29 @@ const Skills: FC<SkillsProps> = ({ darkMode }) => {
     {
       title: "Machine Learning & AI",
       skills: [
-        { name: "Classical ML (Regression, Classification)", level: 90 },
-        { name: "Deep Learning (CNNs, RNNs, LSTMs)", level: 70 },
+        { name: "Classical ML (Regression, Classification)", level: 100 },
+        { name: "Deep Learning (CNNs, RNNs, LSTMs)", level: 90 },
         { name: "Natural Language Processing", level: 75 },
-        { name: "Predictive Analytics", level: 95 }
+        { name: "Predictive Analytics", level: 100 }
       ]
     },
     {
-      title: "Programming Languages",
+      title: "Programming & Query Languages",
       skills: [
-        { name: "Python", level: 95 },
+        { name: "Python", level: 100 },
         { name: "Java", level: 60 },
         { name: "C++", level: 50 },
+        { name: "Postrge-SQL", level: 90 }
       ]
     },
     {
       title: "Data Analysis & Visualization",
       skills: [
-        { name: "pandas & NumPy", level: 95 },
+        { name: "pandas & NumPy", level: 100 },
         { name: "Excel & Power BI", level: 90 },
-        { name: "Scikit-learn", level: 90 },
-        { name: "TensorFlow/PyTorch", level: 80 }
+        { name: "Scikit-learn", level: 95 },
+        { name: "TensorFlow/PyTorch", level: 90 }
+        
       ]
     },
     {
@@ -38,6 +40,7 @@ const Skills: FC<SkillsProps> = ({ darkMode }) => {
         { name: "Streamlit", level: 85 },
         { name: "Database Integration", level: 80 },
         { name: "Cloud Basics", level: 70 }
+        
       ]
     }
   ];
