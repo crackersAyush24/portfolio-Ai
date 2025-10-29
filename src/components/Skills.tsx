@@ -39,7 +39,7 @@ const Skills: FC<SkillsProps> = ({ darkMode }) => {
       skills: [
         { name: "Streamlit", level: 85 },
         { name: "Database Integration", level: 80 },
-        { name: "Cloud Basics", level: 70 }
+        { name: "Cloud Basics", level: 60 }
         
       ]
     }
