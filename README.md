@@ -1,4 +1,3 @@
-Here’s a clean, professional **README.md** template for your **portfolio repository on GitHub**, perfect for showcasing your skills as a **Machine Learning Engineer / AI Developer** 👇
 
 ---
 
