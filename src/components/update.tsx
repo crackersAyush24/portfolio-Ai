@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface UpdatesProps {
   darkMode: boolean;
 }
-
+//
 const Updates: FC<UpdatesProps> = ({ darkMode }) => {
   const updates = [
     {
