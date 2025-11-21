@@ -16,10 +16,17 @@ const Updates: FC<UpdatesProps> = ({ darkMode }) => {
     },
     {
       title: "Delivery Person Risk Management Project",
-      date: "10-10-2025 → Ongoing",
+      date: "10-11-2025 → Ongoing",
       icon: <Zap size={28} className={darkMode ? 'text-orange-400' : 'text-orange-500'} />,
       description: `Working on a data-driven project to analyze and manage delivery personnel risks using predictive analytics and AI.`,
     },
+    {
+      title: "Translation of Portfolio to German (DE)",
+      date: "14-11-2025 → Ongoing",
+      icon: <Zap size={28} className={darkMode ? 'text-orange-400' : 'text-orange-500'} />,
+      description: "Translating my complete professional portfolio into German to improve accessibility for German universities and employers. The work includes adapting technical content, project descriptions, and achievements into accurate, formal German while maintaining clarity and context.",
+    },
+    
   ];
 
   const sectionBg = darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gradient-to-b from-gray-50 via-white to-gray-100';
