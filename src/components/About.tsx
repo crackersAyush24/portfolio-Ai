@@ -77,7 +77,7 @@ const About: React.FC<AboutProps> = ({ darkMode }) => {
               </li>
               <li className={`flex items-center ${textSecondary}`}>
                 <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
-                {lang === 'de' ? 'Studium M.Sc. Informatik, TU Dresden (2025)' : 'Studying M.Sc. Computer Science, TU Dresden (2025)'}
+                {lang === 'de' ? 'Studium M.Sc. Informatik, TU Dresden (2026)' : 'Studying M.Sc. Computer Science, TU Dresden (2026)'}
               </li>
               <li className={`flex items-center ${textSecondary}`}>
                 <span className="w-2 h-2 bg-teal-500 rounded-full mr-3"></span>

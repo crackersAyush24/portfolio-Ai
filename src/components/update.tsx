@@ -14,19 +14,19 @@ const Updates: FC<UpdatesProps> = ({ darkMode }) => {
   const updates = [
     {
       title: translations.updates[lang].items.mscTitle ?? "M.Sc. Computer Science - TU Dresden",
-      date: "2025 → Ongoing",
+      date: "2026 → Ongoing",
       icon: <Brain size={28} className={darkMode ? 'text-blue-400' : 'text-blue-600'} />,
       description: translations.updates[lang].items.msc,
     },
     {
       title: 'Delivery Person Risk Management Project',
-      date: "10-11-2025 → Ongoing",
+      date: "10-03-2026 → Ongoing",
       icon: <Zap size={28} className={darkMode ? 'text-orange-400' : 'text-orange-500'} />,
       description: 'Working on a data-driven project to analyze and manage delivery personnel risks using predictive analytics and AI.',
     },
     {
-      title: translations.updates[lang].items.germanA2Title ?? 'German Language (A2) & Portfolio Localization',
-      date: "14-11-2025 → Ongoing",
+      title: translations.updates[lang].items.germanA2Title ?? 'German Language (A2.2) & Portfolio Localization',
+      date: "14-03-2026 → Ongoing",
       icon: <Zap size={28} className={darkMode ? 'text-orange-400' : 'text-orange-500'} />,
       description: translations.updates[lang].items.germanA2,
     },
