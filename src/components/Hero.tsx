@@ -10,7 +10,7 @@ interface HeroProps {
   darkMode: boolean;
 }
 
-const Hero: FC<HeroProps> = ({ resumeFile = 'Ayush_chaubey_job1.pdf', darkMode }) => {
+const Hero: FC<HeroProps> = ({ resumeFile = 'Ayush_chaubey_job1-6.pdf', darkMode }) => {
   const resumeUrl = import.meta.env.BASE_URL + resumeFile + `?v=${Date.now()}`;
 
   const handleOpenPdf = () => {
@@ -23,7 +23,7 @@ const Hero: FC<HeroProps> = ({ resumeFile = 'Ayush_chaubey_job1.pdf', darkMode }
   const t: Record<string, Record<string, string>> = {
     en: {
       heroLine1: 'Transforming data into actionable insights through machine learning and AI-powered solutions.',
-      heroLine2: translations.about[lang].para ?? 'Recently accepted a role focused on image denoising and semantic segmentation for chemical-peeled microscopy images — building denoising pipelines, U-Net segmentation models, and production-ready APIs. Based in Dresden, Germany and pursuing an M.Sc. in Computer Science at TU Dresden (2025).',
+  heroLine2: translations.about?.[lang]?.para ?? 'Recently accepted a role focused on image denoising and semantic segmentation for chemical-peeled microscopy images — building denoising pipelines, U-Net segmentation models, and production-ready APIs. Based in Dresden, Germany and pursuing an M.Sc. in Computer Science at TU Dresden (2025).',
       viewResume: 'View / Download Resume',
       contact: 'Get In Touch'
     },
