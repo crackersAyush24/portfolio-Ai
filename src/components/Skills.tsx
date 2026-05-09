@@ -1,4 +1,6 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
+import translations from '../i18n/translations';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface SkillsProps {
   darkMode: boolean;
@@ -11,6 +13,8 @@ const Skills: FC<SkillsProps> = ({ darkMode }) => {
       skills: [
         { name: "Classical ML (Regression, Classification)", level: 100 },
         { name: "Deep Learning (CNNs, RNNs, LSTMs)", level: 90 },
+        { name: "Image Denoising & Enhancement (DnCNN, Noise2Noise)", level: 90 },
+        { name: "Image Segmentation (U-Net, Mask R-CNN)", level: 90 },
         { name: "Natural Language Processing", level: 75 },
         { name: "Predictive Analytics", level: 100 }
       ]
@@ -47,6 +51,7 @@ const Skills: FC<SkillsProps> = ({ darkMode }) => {
 
   const technologies = [
     "Python", "Java", "C++", "Scikit-learn", "TensorFlow", "PyTorch",
+    "OpenCV", "pytorch-image-models", "DnCNN", "Noise2Noise", "U-Net", "Mask R-CNN",
     "Pandas", "NumPy", "Excel", "Power BI", "Streamlit", "React",
     "Machine Learning", "Deep Learning", "NLP", "Git"
   ];
@@ -64,6 +69,8 @@ const Skills: FC<SkillsProps> = ({ darkMode }) => {
   const barBg = darkMode ? 'bg-gray-700' : 'bg-gray-200';
   const barGradient = darkMode ? 'from-blue-500 to-purple-500' : 'from-blue-600 to-purple-600';
   const techBg = darkMode ? 'bg-gray-700 text-gray-100 border-gray-600' : 'bg-gradient-to-r from-blue-100 to-purple-100 text-gray-800 border border-blue-200/30';
+
+  const { lang } = useLanguage();
 
   return (
     <section id="skills" className={`py-20 relative overflow-hidden transition-colors duration-500 ${bgClass}`}>
@@ -85,10 +92,9 @@ const Skills: FC<SkillsProps> = ({ darkMode }) => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 relative z-10">
-          <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${titleColor}`}>Skills & Expertise</h2>
+          <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${titleColor}`}>{translations.skills[lang].heading}</h2>
           <p className={`text-xl max-w-3xl mx-auto ${subTextColor}`}>
-            A comprehensive toolkit built through years of hands-on experience 
-            and continuous learning in the rapidly evolving AI landscape.
+            {lang === 'de' ? 'Ein umfassendes Toolkit, aufgebaut durch jahrelange praktische Erfahrung und kontinuierliches Lernen im sich schnell entwickelnden KI-Bereich.' : 'A comprehensive toolkit built through years of hands-on experience and continuous learning in the rapidly evolving AI landscape.'}
           </p>
         </div>
 

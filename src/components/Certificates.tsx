@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink } from "lucide-react";
 import AIParticleBackground from "./AIParticleBackground";
+import { useLanguage } from '../contexts/LanguageContext';
+import translations from '../i18n/translations';
 
 interface CertificatesProps {
   darkMode: boolean;
@@ -114,6 +116,8 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
     updateCenter();
   }, []);
 
+  const { lang } = useLanguage();
+
   return (
     <section
       id="certificates"
@@ -140,8 +144,12 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
             darkMode ? "text-white" : "text-black"
           }`}
         >
-          Certificates & Achievements
+          {translations.certificates[lang].title}
         </motion.h2>
+
+        <p className={`text-center mb-8 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          {translations.certificates[lang].note}
+        </p>
 
         {/* ✅ Carousel with parallax scroll */}
         <motion.div
@@ -222,7 +230,7 @@ const Certificates: React.FC<CertificatesProps> = ({ darkMode }) => {
                     }}
                     className="mt-2 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-3 rounded-md shadow hover:scale-105 hover:shadow-lg transition"
                   >
-                    <ExternalLink size={16} /> View
+                      <ExternalLink size={16} /> {translations.certificatesMeta[lang].view}
                   </button>
                 </div>
               </motion.div>

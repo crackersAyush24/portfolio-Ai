@@ -1,11 +1,15 @@
 import React from 'react';
-import { MapPin, Calendar } from 'lucide-react';
+import { MapPin, Calendar, ExternalLink } from 'lucide-react';
+import translations from '../i18n/translations';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface ExperienceProps {
   darkMode: boolean;
 }
 
 const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
+  const { lang } = useLanguage();
+
   const experiences = [
     {
       title: "Data Analyst",
@@ -44,11 +48,17 @@ const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
         "Researched Deep Learning Architectures including CNNs, RNNs, LSTMs, and GANs",
         "Built AI-powered applications for HR-tech, real estate analysis, and social media analytics",
         "Developed end-to-end AI systems from data collection to deployment",
-        "Focused on applied AI for business automation and process optimization"
-      ],
+          "Focused on applied AI for business automation and process optimization",
+          "Pathak, P. K.; Verma, P. A.; Chaubey, A. V.; Pathak, S. A., 'Foresight Realty: A Comprehensive AI-Powered Framework for Real Estate Investment Analysis', International Journal of Electrical, Electronics and Computer System, vol. 14, no. 1, pp. 44–55, 2025. (https://journals.mriindia.com/index.php/ijeecs/article/view/230)",
+          translations.experience[lang].descriptions.foresightLong
+          ],
+        paperLink: 'https://journals.mriindia.com/index.php/ijeecs/article/view/230',
       technologies: ["TensorFlow", "PyTorch", "Streamlit", "React Native", "Research"]
     }
   ];
+
+  // detect German browser locale to show localized button label (fallback)
+  const isGermanLocale = lang === 'de' || (typeof navigator !== 'undefined' && typeof navigator.language === 'string' && navigator.language.startsWith('de'));
 
   return (
     <section
@@ -61,10 +71,10 @@ const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>
-            Professional Experience
+            {translations.experience[lang].title}
           </h2>
           <p className={`text-xl max-w-3xl mx-auto ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            A journey through innovative companies, pushing the boundaries of AI technology and delivering impactful solutions.
+            {lang === 'de' ? 'Ein Weg durch innovative Unternehmen, die die Grenzen der KI-Technologie verschieben und wirkungsvolle Lösungen liefern.' : 'A journey through innovative companies, pushing the boundaries of AI technology and delivering impactful solutions.'}
           </p>
         </div>
 
@@ -120,6 +130,19 @@ const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
                         </span>
                       ))}
                     </div>
+                    {exp.title === 'AI/ML Research & Development' && (
+                      <div className="mt-6">
+                        <a
+                          href="https://journals.mriindia.com/index.php/ijeecs/article/view/230"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`inline-flex items-center gap-2 px-4 py-2 rounded-md font-semibold transition-all duration-200 ${darkMode ? 'bg-white/10 text-white hover:bg-white/20' : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700'}`}
+                        >
+                          <ExternalLink size={16} />
+                          {isGermanLocale ? translations.experience[lang].readPaper : translations.experience[lang].readPaper}
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </div>
 

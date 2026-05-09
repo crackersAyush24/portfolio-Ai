@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface HeaderProps {
   darkMode: boolean;
@@ -9,6 +10,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { lang, setLang } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -59,6 +61,12 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
               </button>
             ))}
 
+            {/* Language Toggle */}
+            <div className="flex items-center gap-2">
+              <button onClick={() => setLang('en')} className={`px-2 py-1 rounded-md font-semibold ${lang === 'en' ? 'bg-white/25' : 'bg-white/10'}`}>EN</button>
+              <button onClick={() => setLang('de')} className={`px-2 py-1 rounded-md font-semibold ${lang === 'de' ? 'bg-white/25' : 'bg-white/10'}`}>DE</button>
+            </div>
+
             {/* Dark Mode Toggle */}
             <button
               onClick={() => setDarkMode(!darkMode)}
@@ -98,6 +106,11 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
             ))}
 
             {/* Mobile Dark Mode Toggle */}
+            {/* Mobile Language Toggle */}
+            <div className="flex items-center gap-2 px-3 py-2 w-full justify-center">
+              <button onClick={() => setLang('en')} className={`px-3 py-2 rounded-md font-semibold ${lang === 'en' ? 'bg-white/25' : 'bg-white/10'}`}>EN</button>
+              <button onClick={() => setLang('de')} className={`px-3 py-2 rounded-md font-semibold ${lang === 'de' ? 'bg-white/25' : 'bg-white/10'}`}>DE</button>
+            </div>
             <button
               onClick={() => setDarkMode(!darkMode)}
               className={`flex items-center gap-2 px-3 py-2 rounded-md border w-full justify-center

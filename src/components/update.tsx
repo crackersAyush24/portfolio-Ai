@@ -1,32 +1,35 @@
 import React, { useState, FC } from 'react';
 import { Brain, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../contexts/LanguageContext';
+import translations from '../i18n/translations';
 
 interface UpdatesProps {
   darkMode: boolean;
 }
 //
 const Updates: FC<UpdatesProps> = ({ darkMode }) => {
+  const { lang } = useLanguage();
+
   const updates = [
     {
-      title: "AI Professional Course (IBM-Coursera)",
-      date: "16-08-2025 → Ongoing",
+      title: translations.updates[lang].items.mscTitle ?? "M.Sc. Computer Science - TU Dresden",
+      date: "2025 → Ongoing",
       icon: <Brain size={28} className={darkMode ? 'text-blue-400' : 'text-blue-600'} />,
-      description: `Currently enhancing my AI & Machine Learning skills with a comprehensive professional course. Covers deep learning, NLP, and real-world AI applications.`,
+      description: translations.updates[lang].items.msc,
     },
     {
-      title: "Delivery Person Risk Management Project",
+      title: 'Delivery Person Risk Management Project',
       date: "10-11-2025 → Ongoing",
       icon: <Zap size={28} className={darkMode ? 'text-orange-400' : 'text-orange-500'} />,
-      description: `Working on a data-driven project to analyze and manage delivery personnel risks using predictive analytics and AI.`,
+      description: 'Working on a data-driven project to analyze and manage delivery personnel risks using predictive analytics and AI.',
     },
     {
-      title: "Translation of Portfolio to German (DE)",
+      title: translations.updates[lang].items.germanA2Title ?? 'German Language (A2) & Portfolio Localization',
       date: "14-11-2025 → Ongoing",
       icon: <Zap size={28} className={darkMode ? 'text-orange-400' : 'text-orange-500'} />,
-      description: "Translating my complete professional portfolio into German to improve accessibility for German universities and employers. The work includes adapting technical content, project descriptions, and achievements into accurate, formal German while maintaining clarity and context.",
+      description: translations.updates[lang].items.germanA2,
     },
-    
   ];
 
   const sectionBg = darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gradient-to-b from-gray-50 via-white to-gray-100';
@@ -34,6 +37,8 @@ const Updates: FC<UpdatesProps> = ({ darkMode }) => {
   const titleColor = darkMode ? 'text-gray-100' : 'text-gray-900';
   const subTextColor = darkMode ? 'text-gray-300' : 'text-gray-600';
   const gradientGlow = darkMode ? 'from-blue-400 to-purple-600' : 'from-blue-400 to-purple-500';
+
+  
 
   return (
     <section id="updates" className={`py-24 transition-colors duration-500 ${sectionBg}`}>
@@ -45,15 +50,22 @@ const Updates: FC<UpdatesProps> = ({ darkMode }) => {
           className="text-center mb-16"
         >
           <h2 className={`text-5xl font-extrabold mb-3 tracking-tight ${titleColor}`}>
-            Ongoing & Recent Updates
+            {lang === 'de' ? 'Laufendes & Neueste Updates' : 'Ongoing & Recent Updates'}
           </h2>
           <p className={`text-lg max-w-2xl mx-auto ${subTextColor}`}>
-            Here are the projects and learning journeys I’m currently exploring.
+            {lang === 'de' ? 'Hier sind die Projekte und Lernpfade, die ich derzeit erkunde.' : 'Here are the projects and learning journeys I’m currently exploring.'}
           </p>
 
           <motion.div
             className="w-24 h-1 mx-auto mt-4 rounded-full bg-gradient-to-r"
-            style={{ backgroundImage: `linear-gradient(to right, var(--tw-gradient-stops))`, '--tw-gradient-from': gradientGlow.split(' ')[0], '--tw-gradient-to': gradientGlow.split(' ')[1] }}
+            style={{
+              backgroundImage: `linear-gradient(to right, var(--tw-gradient-stops))`,
+              // set CSS variables in a type-safe way
+              // @ts-ignore - assigning CSS variables for tailwind gradient stops
+              ['--tw-gradient-from' as any]: gradientGlow.split(' ')[0],
+              // @ts-ignore
+              ['--tw-gradient-to' as any]: gradientGlow.split(' ')[1]
+            }}
             animate={{ backgroundPosition: ['0%', '100%'] }}
             transition={{ repeat: Infinity, duration: 4, ease: 'linear' }}
           />
@@ -89,6 +101,7 @@ interface ReadMoreCardProps {
 
 const ReadMoreCard: FC<ReadMoreCardProps> = ({ title, icon, description, date, darkMode, cardBg, titleColor, subTextColor }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { lang: cardLang } = useLanguage();
   const lines = description.split('. ').filter(Boolean);
   const firstLine = lines[0] + (lines.length > 1 ? '.' : '');
   const rest = lines.slice(1).join('. ');
@@ -131,7 +144,7 @@ const ReadMoreCard: FC<ReadMoreCardProps> = ({ title, icon, description, date, d
             onClick={() => setIsOpen(!isOpen)}
             className="text-blue-500 ml-2 font-medium hover:underline focus:outline-none"
           >
-            {isOpen ? 'Read Less' : 'Read More'}
+            {isOpen ? (cardLang === 'de' ? 'Weniger lesen' : 'Read Less') : (cardLang === 'de' ? 'Mehr lesen' : 'Read More')}
           </button>
         )}
       </p>

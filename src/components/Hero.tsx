@@ -1,5 +1,7 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Github, Linkedin, Mail, Download } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
+import translations from '../i18n/translations';
 import GlitchText from './GlitchText';
 import NeuralNetworkAnimation from './NeuralNetworkAnimation';
 
@@ -14,6 +16,23 @@ const Hero: FC<HeroProps> = ({ resumeFile = 'Ayush_chaubey_job1.pdf', darkMode }
   const handleOpenPdf = () => {
     const newWindow = window.open(resumeUrl, '_blank');
     if (newWindow) newWindow.focus();
+  };
+
+  const { lang } = useLanguage();
+
+  const t: Record<string, Record<string, string>> = {
+    en: {
+      heroLine1: 'Transforming data into actionable insights through machine learning and AI-powered solutions.',
+      heroLine2: translations.about[lang].para ?? 'Recently accepted a role focused on image denoising and semantic segmentation for chemical-peeled microscopy images — building denoising pipelines, U-Net segmentation models, and production-ready APIs. Based in Dresden, Germany and pursuing an M.Sc. in Computer Science at TU Dresden (2025).',
+      viewResume: 'View / Download Resume',
+      contact: 'Get In Touch'
+    },
+    de: {
+      heroLine1: 'Ich verwandele Daten in umsetzbare Erkenntnisse mit Machine Learning und KI-Lösungen.',
+      heroLine2: 'Kürzlich eine Rolle angenommen, die sich auf Bildentrauschung und semantische Segmentierung von chemisch präparierten Mikroskopiebildern konzentriert — Entwicklung von Denoising-Pipelines, U-Net-Segmentierungsmodellen und produktionsreifen APIs. In Dresden, Deutschland ansässig und Studiere M.Sc. Informatik an der TU Dresden (2025).',
+      viewResume: 'Lebenslauf ansehen / herunterladen',
+      contact: 'Kontakt'
+    }
   };
 
   const bgClass = darkMode
@@ -55,8 +74,9 @@ const Hero: FC<HeroProps> = ({ resumeFile = 'Ayush_chaubey_job1.pdf', darkMode }
 
           {/* Description */}
           <p className={`text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed ${subTextColor}`}>
-            Transforming data into actionable insights through machine learning, predictive analytics,
-            and AI-powered solutions. Specialized in job matching, candidate screening, and business intelligence.
+            {t[lang].heroLine1}
+            {" "}
+            {t[lang].heroLine2}
           </p>
 
           {/* Buttons */}
@@ -67,7 +87,7 @@ const Hero: FC<HeroProps> = ({ resumeFile = 'Ayush_chaubey_job1.pdf', darkMode }
               className={`flex items-center gap-2 px-8 py-4 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-2 hover:scale-105 hover:rotateX-5 transition-all duration-300 perspective-1000 ${buttonBg}`}
             >
               <Download size={20} />
-              View / Download Resume
+              {t[lang].viewResume}
             </button>
 
             {/* Scroll to Contact */}
@@ -81,7 +101,7 @@ const Hero: FC<HeroProps> = ({ resumeFile = 'Ayush_chaubey_job1.pdf', darkMode }
                   : 'border-gray-300 text-gray-700 hover:border-blue-600 hover:text-blue-600'
               }`}
             >
-              Get In Touch
+              {t[lang].contact}
             </button>
           </div>
 

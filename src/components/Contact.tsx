@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, Send, Github, Linkedin, CheckCircle2, XCircle } from "lucide-react";
 import emailjs from "emailjs-com";
+import translations from '../i18n/translations';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface ContactProps {
   darkMode: boolean;
@@ -33,8 +35,8 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
 
   const contactInfo = [
     { icon: <Mail size={24} />, title: "Email", value: "chaubeyayush04@gmail.com", href: "mailto:chaubeyayush04@gmail.com" },
-    { icon: <Phone size={24} />, title: "Phone", value: "+91 70288 81954", href: "tel:+917028881954" },
-    { icon: <MapPin size={24} />, title: "Location", value: "Mumbai, India", href: "#" },
+    { icon: <Phone size={24} />, title: "Phone", value: "+49 15224720727", href: "tel:+4915224720727" },
+    { icon: <MapPin size={24} />, title: "Location", value: "Dresden, Germany", href: "#" },
   ];
 
   const socialLinks = [
@@ -50,21 +52,23 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
     ? "bg-gray-700 text-gray-100 placeholder-gray-300 border-gray-600"
     : "bg-white text-gray-900 placeholder-gray-500 border-gray-300";
 
+  const { lang } = useLanguage();
+
   return (
     <section id="contact" className={`${bgClass} min-h-screen transition-colors duration-500`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Let's Connect</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">{translations.contact[lang].heading ?? (lang === 'de' ? 'Lass uns verbinden' : "Let's Connect")}</h2>
           <p className={`text-xl max-w-3xl mx-auto ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
-            Ready to discuss your next AI project or collaboration? I'm always excited to work on innovative solutions.
+            {translations.contact[lang].paragraphs?.reachOut ?? (lang === 'de' ? 'Bereit, Ihr nächstes KI-Projekt oder eine Zusammenarbeit zu besprechen? Ich freue mich immer über innovative Lösungen.' : 'Ready to discuss your next AI project or collaboration? I\'m always excited to work on innovative solutions.')}
           </p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Contact Info */}
           <div className="lg:col-span-1 space-y-6">
-            <h3 className="text-2xl font-bold mb-8">Get In Touch</h3>
+            <h3 className="text-2xl font-bold mb-8">{translations.hero[lang].contact}</h3>
             {contactInfo.map((info, i) => (
               <a
                 key={i}
@@ -72,15 +76,15 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                 className={`flex items-center gap-4 p-4 rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105 ${cardBg}`}
               >
                 {info.icon}
-                <div>
-                  <div className="font-semibold">{info.title}</div>
+                  <div>
+                  <div className="font-semibold">{info.title === 'Phone' ? translations.contact[lang].phoneLabel ?? info.title : info.title === 'Email' ? translations.contact[lang].emailLabel ?? info.title : info.title}</div>
                   <div className="text-sm">{info.value}</div>
                 </div>
               </a>
             ))}
 
             <div>
-              <h4 className="text-xl font-bold mb-4">Follow Me</h4>
+              <h4 className="text-xl font-bold mb-4">{translations.contactMeta[lang].follow}</h4>
               <div className="flex gap-4">
                 {socialLinks.map((social, i) => (
                   <a
@@ -99,13 +103,13 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
           {/* Contact Form */}
           <div className="lg:col-span-2">
             <div className={`${cardBg} p-8 rounded-2xl shadow-lg`}>
-              <h3 className="text-2xl font-bold mb-6">Send Message</h3>
+              <h3 className="text-2xl font-bold mb-6">{translations.contactMeta[lang].sendMessage}</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <input
                     type="text"
                     name="name"
-                    placeholder="Full Name *"
+                    placeholder={lang === 'de' ? 'Vollständiger Name *' : 'Full Name *'}
                     value={formData.name}
                     onChange={handleChange}
                     required
@@ -114,7 +118,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                   <input
                     type="email"
                     name="email"
-                    placeholder="Email Address *"
+                    placeholder={lang === 'de' ? 'E-Mail-Adresse *' : 'Email Address *'}
                     value={formData.email}
                     onChange={handleChange}
                     required
@@ -124,7 +128,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                 <input
                   type="text"
                   name="subject"
-                  placeholder="Subject *"
+                  placeholder={lang === 'de' ? 'Betreff *' : 'Subject *'}
                   value={formData.subject}
                   onChange={handleChange}
                   required
@@ -133,7 +137,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                 <textarea
                   name="message"
                   rows={6}
-                  placeholder="Message *"
+                  placeholder={lang === 'de' ? 'Nachricht *' : 'Message *'}
                   value={formData.message}
                   onChange={handleChange}
                   required
@@ -143,8 +147,9 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                   type="submit"
                   className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all"
                 >
-                  <Send size={20} /> Send Message
+                  <Send size={20} /> {translations.contactMeta[lang].sendButton}
                 </button>
+                
               </form>
             </div>
           </div>

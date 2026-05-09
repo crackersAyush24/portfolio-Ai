@@ -1,15 +1,29 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { ExternalLink, Github, Brain, Eye, TrendingUp } from 'lucide-react';
+import translations from '../i18n/translations';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface ProjectsProps {
   darkMode: boolean;
 }
 
 const Projects: FC<ProjectsProps> = ({ darkMode }) => {
+  const { lang } = useLanguage();
+
   const projects = [
     {
+      title: "Image Denoising & Segmentation for Chemical-Peeled Images",
+      description: translations.projects[lang].descriptions.denoising,
+      image: "https://images.pexels.com/photos/356040/pexels-photo-356040.jpeg?auto=compress&cs=tinysrgb&w=800",
+      technologies: ["Python", "PyTorch", "U-Net", "OpenCV", "Noise2Noise", "DnCNN", "Streamlit", "Flask", "PSNR/SSIM"],
+      icon: <Eye size={24} className={darkMode ? 'text-teal-400' : 'text-teal-600'} />,
+      github: "#",
+      demo: "#",
+      featured: true
+    },
+    {
       title: "Deep Fake Detection",
-      description: "Built a deepfake detection pipeline for images, videos, and real-time. Used MTCNN + CV for face detection, probability scoring, and annotated outputs. Developed Streamlit UI & Flask API for real-time use.",
+      description: translations.projects[lang].descriptions.deepfake,
       image: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=600",
       technologies: ["Python", "OpenCV", "Streamlit", "Flask", "TensorFlow/PyTorch"],
       icon: <Brain size={24} className={darkMode ? 'text-blue-400' : 'text-blue-600'} />,
@@ -19,13 +33,7 @@ const Projects: FC<ProjectsProps> = ({ darkMode }) => {
     },
     {
       title: "Handwritten Digit Classification using Keras",
-      description: (
-        <>
-          Train a deep neural network to recognize handwritten digits.<br />
-          Developed and trained a deep neural network using the Keras Sequential API to classify handwritten digits from the MNIST dataset.<br />
-          Implemented ReLU and Softmax activation functions, optimized with Adam and categorical cross-entropy loss, achieving ~98% accuracy on test data.
-        </>
-      ),
+      description: translations.projects[lang].descriptions.mnist,
       image: "https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=600",
       technologies: ["Python", "Streamlit", "Plotly", "Deep-Learning"," TensorFlow"," Keras", "NumPy", "Matplotlib"],
       icon: <Eye size={24} className={darkMode ? 'text-teal-400' : 'text-teal-600'} />,
@@ -35,7 +43,7 @@ const Projects: FC<ProjectsProps> = ({ darkMode }) => {
     },
     {
       title: "Movie Revenue Prediction",
-      description: "Built a machine learning model and Streamlit app to predict a movie’s box-office revenue using features like budget, runtime, genre, cast popularity, and production company. Applied regression algorithms including Linear Regression, Random Forest, and XGBoost.",
+      description: translations.projects[lang].descriptions.movie,
       image: "https://images.pexels.com/photos/3183144/pexels-photo-3183144.jpeg?auto=compress&cs=tinysrgb&w=600",
       technologies: ["Python", "Streamlit", "Machine Learning", "Regression", "Data Analysis"],
       icon: <TrendingUp size={24} className={darkMode ? 'text-purple-400' : 'text-purple-600'} />,
@@ -45,7 +53,7 @@ const Projects: FC<ProjectsProps> = ({ darkMode }) => {
     },
     {
       title: "Foresight Realty - Predicting Price",
-      description: "Worked as Project Leader to build a ML model predicting real estate prices based on features like location, size, and amenities. Used regression techniques for price forecasting and deployed with Flask for real-time predictions.",
+      description: translations.projects[lang].descriptions.foresight,
       image: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=600",
       technologies: ["Python", "Flask", "Machine Learning", "Regression", "Real Estate Analytics"],
       icon: <TrendingUp size={24} className={darkMode ? 'text-purple-400' : 'text-purple-600'} />,
@@ -53,21 +61,22 @@ const Projects: FC<ProjectsProps> = ({ darkMode }) => {
       demo: "https://journals.mriindia.com/index.php/ijeecs/article/view/230",
       featured: true
     }
+    ,
+    
   ];
 
   const sectionBg = darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900';
   const cardBg = darkMode ? 'bg-gray-800 border-gray-700 text-gray-100' : 'bg-gradient-to-br from-gray-50 to-blue-50';
   const subTextColor = darkMode ? 'text-gray-300' : 'text-gray-600';
 
+
   return (
     <section id="projects" className={`py-20 transition-colors duration-500 ${sectionBg}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-bold mb-6 relative z-10`}>
-            Featured Projects
-          </h2>
+          <h2 className={`text-4xl md:text-5xl font-bold mb-6 relative z-10`}>{translations.projects[lang].heading}</h2>
           <p className={`text-xl ${subTextColor} max-w-3xl mx-auto relative z-10`}>
-            A showcase of AI & ML projects demonstrating real-world impact and innovation.
+            {translations.projectsMeta[lang].intro}
           </p>
         </div>
 
@@ -95,7 +104,7 @@ const Projects: FC<ProjectsProps> = ({ darkMode }) => {
                   {project.icon}
                   {project.featured && (
                     <span className="ml-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                      Featured
+                      {translations.projectsMeta[lang].featuredLabel}
                     </span>
                   )}
                 </div>
@@ -123,14 +132,14 @@ const Projects: FC<ProjectsProps> = ({ darkMode }) => {
                     className="flex items-center gap-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
                   >
                     <Github size={20} />
-                    Code
+                    {translations.projectsMeta[lang].buttons.code}
                   </a>
                   <a
                     href={project.demo}
                     className="flex items-center gap-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
                   >
                     <ExternalLink size={20} />
-                    Live Demo
+                    {translations.projectsMeta[lang].buttons.demo}
                   </a>
                 </div>
               </div>
