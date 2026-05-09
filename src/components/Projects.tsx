@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { ExternalLink, Github, Brain, Eye, TrendingUp } from 'lucide-react';
+import { motion } from 'framer-motion';
 import translations from '../i18n/translations';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -82,21 +83,28 @@ const Projects: FC<ProjectsProps> = ({ darkMode }) => {
 
         <div className="space-y-12">
           {projects.map((project, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ scale: 0.98, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.45, ease: 'easeOut', delay: index * 0.06 }}
+              whileHover={{ scale: 1.03 }}
               className={`grid lg:grid-cols-2 gap-12 items-center relative z-10 p-8 rounded-2xl ${project.featured ? cardBg : ''}`}
             >
               <div className={index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}>
-                <div className="relative group overflow-hidden rounded-xl shadow-lg transform hover:rotateY-12 hover:scale-105 transition-all duration-500 perspective-1000 hologram-effect">
-                  <img
+                <motion.div className="relative group overflow-hidden rounded-xl shadow-lg transform transition-all duration-500 perspective-1000 hologram-effect"
+                  whileHover={{ scale: 1.03 }}
+                >
+                  <motion.img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-64 lg:h-80 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-64 lg:h-80 object-cover transition-transform duration-300"
+                    whileHover={{ scale: 1.06 }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110">
                     <div className="absolute bottom-4 left-4 text-white font-bold">AI Powered</div>
                   </div>
-                </div>
+                </motion.div>
               </div>
 
               <div className={index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}>
@@ -143,7 +151,7 @@ const Projects: FC<ProjectsProps> = ({ darkMode }) => {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

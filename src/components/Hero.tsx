@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC, useRef, useEffect } from 'react';
 import { Github, Linkedin, Mail, Download } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import translations from '../i18n/translations';
@@ -19,6 +19,46 @@ const Hero: FC<HeroProps> = ({ resumeFile = 'Ayush_chaubey_job1-6.pdf', darkMode
   };
 
   const { lang } = useLanguage();
+
+
+  const btnRef = useRef<HTMLButtonElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || !btnRef.current) return;
+
+    const btn = btnRef.current;
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = btn.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const threshold = 160;
+      if (dist < threshold && dist > 0) {
+        const force = (threshold - dist) / threshold; // 0..1
+        const tx = (dx / dist) * force * 18;
+        const ty = (dy / dist) * force * 10;
+        btn.style.transform = `translate(${tx}px, ${ty}px) scale(${1 + force * 0.06})`;
+      } else {
+        btn.style.transform = '';
+      }
+    };
+
+    const handleLeave = () => {
+      if (btn) btn.style.transform = '';
+    };
+
+    container.addEventListener('mousemove', handleMouseMove);
+    container.addEventListener('mouseleave', handleLeave);
+
+    return () => {
+      container.removeEventListener('mousemove', handleMouseMove);
+      container.removeEventListener('mouseleave', handleLeave);
+    };
+  }, [darkMode]);
 
   const t: Record<string, Record<string, string>> = {
     en: {
@@ -80,15 +120,50 @@ const Hero: FC<HeroProps> = ({ resumeFile = 'Ayush_chaubey_job1-6.pdf', darkMode
           </p>
 
           {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            {/* Open PDF */}
-            <button
-              onClick={handleOpenPdf}
-              className={`flex items-center gap-2 px-8 py-4 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-2 hover:scale-105 hover:rotateX-5 transition-all duration-300 perspective-1000 ${buttonBg}`}
-            >
-              <Download size={20} />
-              {t[lang].viewResume}
-            </button>
+          <div ref={containerRef} className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+            {/* Open PDF - magnetic button */}
+            <div className="relative">
+              <button
+                ref={btnRef}
+                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  const parent = containerRef.current ?? document.body;
+                  const parentRect = parent.getBoundingClientRect();
+                  const clientX = e.clientX;
+                  const clientY = e.clientY;
+                  const x = clientX - parentRect.left;
+                  const y = clientY - parentRect.top;
+
+                  for (let i = 0; i < 9; i++) {
+                    const p = document.createElement('span');
+                    const size = Math.random() * 6 + 4;
+                    p.style.position = 'absolute';
+                    p.style.left = `${x - size / 2}px`;
+                    p.style.top = `${y - size / 2}px`;
+                    p.style.width = `${size}px`;
+                    p.style.height = `${size}px`;
+                    p.style.borderRadius = '50%';
+                    p.style.background = darkMode ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.98)';
+                    p.style.pointerEvents = 'none';
+                    p.style.transform = 'translate(0,0) scale(1)';
+                    p.style.transition = `transform 700ms cubic-bezier(.2,.8,.2,1), opacity 700ms ease-out`;
+                    parent.appendChild(p);
+                    const angle = Math.random() * Math.PI * 2;
+                    const dist = 36 + Math.random() * 40;
+                    requestAnimationFrame(() => {
+                      p.style.transform = `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist}px) scale(0.4)`;
+                      p.style.opacity = '0';
+                    });
+                    setTimeout(() => p.remove(), 800);
+                  }
+
+                  handleOpenPdf();
+                }}
+                className={`flex items-center gap-2 px-8 py-4 rounded-lg font-semibold transition-all duration-300 perspective-1000 ${buttonBg}`}
+              >
+                <Download size={20} />
+                {t[lang].viewResume}
+              </button>
+            </div>
 
             {/* Scroll to Contact */}
             <button

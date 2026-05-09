@@ -24,6 +24,22 @@ const translations = {
         journey2: "At Jobclassify, I improved job matching accuracy using machine learning models and automated candidate screening processes, saving more than 200 hours monthly. I focus on leveraging AI to streamline business processes and create measurable impact.",
         journey3: "Currently studying for an M.Sc. in Computer Science at TU Dresden (2025), with a focus on computer vision and systems for machine learning. I enjoy bridging research and production to build robust AI systems."
       }
+      , highlights: [
+        { title: 'AI Research', description: 'Years of building and evaluating neural networks and practical ML systems' },
+        { title: 'Full-Stack Development', description: 'Building scalable AI services from prototype to production' },
+        { title: 'Image Processing', description: 'Practical expertise in image denoising, segmentation, and microscopy analysis' },
+        { title: 'Innovation', description: 'Passionate about solving complex problems with creative AI solutions' }
+      ],
+      quickFacts: {
+        heading: 'Quick Facts',
+        items: [
+          'Located in Dresden, Germany',
+          '2+ years in Data Analysis & AI/ML',
+          'M.Sc. Computer Science, TU Dresden (2025)',
+          'CGPA: 8.67 in Computer Engineering',
+          'Improvement in ML model accuracy'
+        ]
+      }
     },
     de: {
       heading: 'Über mich',
@@ -32,6 +48,22 @@ const translations = {
         journey1: 'Mit einem B.E. in Computer Engineering von der University of Mumbai und einem starken CGPA von 8,67 habe ich Fachwissen in Datenanalyse, Machine Learning und KI-Anwendungen aufgebaut. Meine Reise begann mit akademischer Exzellenz in Mathematik und Algorithmen und entwickelte sich zu praxisorientierten KI-Lösungen für HR-Tech und Business Intelligence.',
         journey2: 'Bei Jobclassify habe ich die Genauigkeit der Stellenzuordnung durch Machine-Learning-Modelle und automatisierte Kandidatenscreening-Prozesse verbessert und dabei mehr als 200 Stunden pro Monat eingespart. Ich konzentriere mich darauf, KI zur Optimierung von Geschäftsprozessen und zur Schaffung messbarer Auswirkungen einzusetzen.',
         journey3: 'Derzeit studiere ich M.Sc. Informatik an der TU Dresden (2025) mit Schwerpunkt auf Computer Vision und Systemen für Machine Learning. Ich überbrücke gerne Forschung und Produktion, um robuste KI-Systeme zu entwickeln.'
+      }
+      , highlights: [
+        { title: 'KI-Forschung', description: 'Jahre des Aufbaus und der Bewertung neuronaler Netze und praktischer ML-Systeme' },
+        { title: 'Full-Stack-Entwicklung', description: 'Aufbau skalierbarer AI-Dienste vom Prototyp bis zur Produktion' },
+        { title: 'Bildverarbeitung', description: 'Praktische Erfahrung in Bildentrauschung, Segmentierung und Mikroskopie-Analyse' },
+        { title: 'Innovation', description: 'Leidenschaft dafür, komplexe Probleme mit kreativen KI-Lösungen zu lösen' }
+      ],
+      quickFacts: {
+        heading: 'Kurze Fakten',
+        items: [
+          'Ansässig in Dresden, Deutschland',
+          '2+ Jahre in Datenanalyse & AI/ML',
+          'Studium M.Sc. Informatik, TU Dresden (2025)',
+          'CGPA: 8,67 in Computer Engineering',
+          'Verbesserung der ML-Modellgenauigkeit'
+        ]
       }
     }
   },

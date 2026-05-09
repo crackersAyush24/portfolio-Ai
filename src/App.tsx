@@ -13,6 +13,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import Updates from './components/update';
 import Certificates from './components/Certificates';
 import AppFooter from './components/AppFooter';
+import WelcomeOverlay from './components/WelcomeOverlay';
 // footer translations will be used via useLanguage inlined below
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
   return (
     <LanguageProvider>
       <div className={`${darkMode ? 'dark bg-gray-900 text-gray-100' : 'bg-white text-gray-900'} min-h-screen transition-colors duration-500`}>
+  <WelcomeOverlay />
       {/* Background and floating characters */}
       <AIParticleBackground darkMode={darkMode} /> {/* Pass darkMode prop */}
       <ScrollingCharacter />
