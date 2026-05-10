@@ -18,11 +18,11 @@ const translations = {
   about: {
     en: {
       heading: 'About Me',
-      para: 'I am a Data Analyst and AI engineer focusing on image denoising and segmentation. Currently pursuing an M.Sc. in Computer Science at TU Dresden (2025).'
+      para: 'I am a Data Analyst and AI engineer focusing on image denoising and segmentation. Currently pursuing an M.Sc. in Computer Science at TU Dresden (2026).'
       , long: {
         journey1: "With a B.E. in Computer Engineering from University of Mumbai and a strong CGPA of 8.67, I've built expertise in data analysis, machine learning, and AI applications. My journey began with academic excellence in mathematics and algorithms, evolving into practical AI solutions for HR-tech and business intelligence.",
         journey2: "At Jobclassify, I improved job matching accuracy using machine learning models and automated candidate screening processes, saving more than 200 hours monthly. I focus on leveraging AI to streamline business processes and create measurable impact.",
-        journey3: "Currently studying for an M.Sc. in Computer Science at TU Dresden (2025), with a focus on computer vision and systems for machine learning. I enjoy bridging research and production to build robust AI systems."
+        journey3: "Currently studying for an M.Sc. in Computer Science at TU Dresden (2026), with a focus on computer vision and systems for machine learning. I enjoy bridging research and production to build robust AI systems."
       }
       , highlights: [
         { title: 'AI Research', description: 'Years of building and evaluating neural networks and practical ML systems' },
@@ -35,7 +35,7 @@ const translations = {
         items: [
           'Located in Dresden, Germany',
           '2+ years in Data Analysis & AI/ML',
-          'M.Sc. Computer Science, TU Dresden (2025)',
+          'M.Sc. Computer Science, TU Dresden (2026)',
           'CGPA: 8.67 in Computer Engineering',
           'Improvement in ML model accuracy'
         ]
@@ -43,11 +43,11 @@ const translations = {
     },
     de: {
       heading: 'Über mich',
-      para: 'Ich bin Data Analyst und KI-Ingenieur mit Schwerpunkt auf Bildentrauschung und Segmentierung. Zurzeit Studiere ich M.Sc. Informatik an der TU Dresden (2025).'
+      para: 'Ich bin Data Analyst und KI-Ingenieur mit Schwerpunkt auf Bildentrauschung und Segmentierung. Zurzeit Studiere ich M.Sc. Informatik an der TU Dresden (2026).'
       , long: {
         journey1: 'Mit einem B.E. in Computer Engineering von der University of Mumbai und einem starken CGPA von 8,67 habe ich Fachwissen in Datenanalyse, Machine Learning und KI-Anwendungen aufgebaut. Meine Reise begann mit akademischer Exzellenz in Mathematik und Algorithmen und entwickelte sich zu praxisorientierten KI-Lösungen für HR-Tech und Business Intelligence.',
         journey2: 'Bei Jobclassify habe ich die Genauigkeit der Stellenzuordnung durch Machine-Learning-Modelle und automatisierte Kandidatenscreening-Prozesse verbessert und dabei mehr als 200 Stunden pro Monat eingespart. Ich konzentriere mich darauf, KI zur Optimierung von Geschäftsprozessen und zur Schaffung messbarer Auswirkungen einzusetzen.',
-        journey3: 'Derzeit studiere ich M.Sc. Informatik an der TU Dresden (2025) mit Schwerpunkt auf Computer Vision und Systemen für Machine Learning. Ich überbrücke gerne Forschung und Produktion, um robuste KI-Systeme zu entwickeln.'
+        journey3: 'Derzeit studiere ich M.Sc. Informatik an der TU Dresden (2026) mit Schwerpunkt auf Computer Vision und Systemen für Machine Learning. Ich überbrücke gerne Forschung und Produktion, um robuste KI-Systeme zu entwickeln.'
       }
       , highlights: [
         { title: 'KI-Forschung', description: 'Jahre des Aufbaus und der Bewertung neuronaler Netze und praktischer ML-Systeme' },
@@ -60,7 +60,7 @@ const translations = {
         items: [
           'Ansässig in Dresden, Deutschland',
           '2+ Jahre in Datenanalyse & AI/ML',
-          'Studium M.Sc. Informatik, TU Dresden (2025)',
+          'Studium M.Sc. Informatik, TU Dresden (2026)',
           'CGPA: 8,67 in Computer Engineering',
           'Verbesserung der ML-Modellgenauigkeit'
         ]
@@ -145,7 +145,7 @@ const translations = {
   updates: {
     en: { heading: 'Ongoing', items: {
       mscTitle: 'M.Sc. Computer Science - TU Dresden',
-      msc: 'Accepted into M.Sc. Computer Science at TU Dresden (2025 intake).',
+      msc: 'Accepted into M.Sc. Computer Science at TU Dresden (2026 intake).',
       germanA2Title: 'German Language (A2) & Portfolio Localization',
       germanA2: 'Completed German A2 certificate.',
       paperTitle: 'Foresight Realty Publication',
@@ -153,7 +153,7 @@ const translations = {
     } },
     de: { heading: 'Laufendes', items: {
       mscTitle: 'M.Sc. Informatik - TU Dresden',
-      msc: 'Zugelassen zum M.Sc. Informatik an der TU Dresden (Studienbeginn 2025).',
+      msc: 'Zugelassen zum M.Sc. Informatik an der TU Dresden (Studienbeginn 2026).',
       germanA2Title: 'Deutsch (A2) & Portfolio-Lokalisierung',
       germanA2: 'Deutschzertifikat A2 abgeschlossen.',
       paperTitle: 'Foresight Realty Veröffentlichung',

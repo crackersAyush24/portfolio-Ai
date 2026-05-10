@@ -63,13 +63,13 @@ const Hero: FC<HeroProps> = ({ resumeFile = 'Ayush_chaubey_job1-6.pdf', darkMode
   const t: Record<string, Record<string, string>> = {
     en: {
       heroLine1: 'Transforming data into actionable insights through machine learning and AI-powered solutions.',
-  heroLine2: translations.about?.[lang]?.para ?? 'Recently accepted a role focused on image denoising and semantic segmentation for chemical-peeled microscopy images — building denoising pipelines, U-Net segmentation models, and production-ready APIs. Based in Dresden, Germany and pursuing an M.Sc. in Computer Science at TU Dresden (2025).',
+  heroLine2: translations.about?.[lang]?.para ?? 'Recently accepted a role focused on image denoising and semantic segmentation for chemical-peeled microscopy images — building denoising pipelines, U-Net segmentation models, and production-ready APIs. Based in Dresden, Germany and pursuing an M.Sc. in Computer Science at TU Dresden (2026).',
       viewResume: 'View / Download Resume',
       contact: 'Get In Touch'
     },
     de: {
       heroLine1: 'Ich verwandele Daten in umsetzbare Erkenntnisse mit Machine Learning und KI-Lösungen.',
-      heroLine2: 'Kürzlich eine Rolle angenommen, die sich auf Bildentrauschung und semantische Segmentierung von chemisch präparierten Mikroskopiebildern konzentriert — Entwicklung von Denoising-Pipelines, U-Net-Segmentierungsmodellen und produktionsreifen APIs. In Dresden, Deutschland ansässig und Studiere M.Sc. Informatik an der TU Dresden (2025).',
+      heroLine2: 'Kürzlich eine Rolle angenommen, die sich auf Bildentrauschung und semantische Segmentierung von chemisch präparierten Mikroskopiebildern konzentriert — Entwicklung von Denoising-Pipelines, U-Net-Segmentierungsmodellen und produktionsreifen APIs. In Dresden, Deutschland ansässig und Studiere M.Sc. Informatik an der TU Dresden (2026).',
       viewResume: 'Lebenslauf ansehen / herunterladen',
       contact: 'Kontakt'
     }

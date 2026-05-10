@@ -69,7 +69,7 @@ const AyushChatbot = () => {
     home: "Mumbai (India)",
 
     // About
-  about: "Data Analyst and AI engineer with a B.E. in Computer Engineering. Currently pursuing an M.Sc. in Computer Science at TU Dresden (2025). I have hands-on experience in data analysis, computer vision, model deployment, and applied research. Skilled in Python, PyTorch, OpenCV, and building production-ready ML systems.",
+  about: "Data Analyst and AI engineer with a B.E. in Computer Engineering. Currently pursuing an M.Sc. in Computer Science at TU Dresden (2026). I have hands-on experience in data analysis, computer vision, model deployment, and applied research. Skilled in Python, PyTorch, OpenCV, and building production-ready ML systems.",
 
     // Work Experience
     experience: [
@@ -153,13 +153,13 @@ const AyushChatbot = () => {
       {
         name: "M.Sc. Computer Science - TU Dresden",
         platform: "TU Dresden",
-  duration: "2025 – Ongoing",
+  duration: "2026 – Ongoing",
         description: "Pursuing master's coursework and research focused on ML, CV and systems for AI."
       },
       {
         name: "German Language (A2)",
         platform: "Local / Online",
-        duration: "2025 – Ongoing",
+        duration: "2026 – Ongoing",
         description: "Continuing German study to reach A2 proficiency for daily life and academic communication."
       }
     ],
@@ -192,7 +192,7 @@ const AyushChatbot = () => {
 
     if (message.includes('about ayush') || message.includes('about him') || message.includes('who is ayush') || message === 'ayush') {
       return langToUse === 'de'
-  ? `Ich bin Data Analyst und KI-Ingenieur mit einem B.E. in Computer Engineering. Zurzeit studiere ich M.Sc. Informatik an der TU Dresden (2025). Ich arbeite mit Python, PyTorch, OpenCV und entwickle produktionsreife ML-Systeme.`
+  ? `Ich bin Data Analyst und KI-Ingenieur mit einem B.E. in Computer Engineering. Zurzeit studiere ich M.Sc. Informatik an der TU Dresden (2026). Ich arbeite mit Python, PyTorch, OpenCV und entwickle produktionsreife ML-Systeme.`
         : ayushKnowledgeBase.about;
     }
 
@@ -282,10 +282,9 @@ const AyushChatbot = () => {
       }
     }
 
-    return langToUse === 'de'
-      ? "Ich bin hier, um über Ayush, KI, Projekte oder Mathe zu sprechen. Frag mich einfach in kurzen Sätzen."
-      : "I'm here to chat about Ayush, AI, projects, math, or anything else you'd like to know. Ask me anything!";
-
+return langToUse === 'de'
+  ? `Hmm 🤔 Diese Information habe ich noch nicht.\n\nContact  Ayush direkt für mehr Informationen 👨‍💻`
+  : `Hmm 🤔 I don't have this information about Ayush yet.\n\nContact Ayush directly for more information 👨‍💻`;
   };
 
   // translateToGerman: rule-based, A2-friendly translations for short messages
@@ -445,10 +444,44 @@ const AyushChatbot = () => {
                           <div className="flex items-start gap-2">
                             {message.isBot && <Bot size={16} className="text-blue-600 mt-1 flex-shrink-0" />}
                             {!message.isBot && <User size={16} className="text-white mt-1 flex-shrink-0" />}
-                            <div className="whitespace-pre-line leading-relaxed">
-                              { /* show translated text if present */ }
-                              {translatedMap[message.id] ? translatedMap[message.id] : message.text}
-                            </div>
+<div className="flex flex-col">
+
+  <div className="whitespace-pre-line leading-relaxed">
+    {translatedMap[message.id]
+      ? translatedMap[message.id]
+      : message.text}
+  </div>
+
+{message.isBot &&
+
+  (
+    message.text.toLowerCase().includes("contact ayush") ||
+    message.text.toLowerCase().includes("informationen")
+  ) && (
+    <button
+      onClick={() => {
+        setIsOpen(false);
+
+        setTimeout(() => {
+          const section = document.getElementById("contact");
+
+          if (section) {
+            section.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+          }
+        }, 200);
+      }}
+      className="mt-3 w-fit px-3 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-semibold hover:scale-105 transition-all duration-200"
+    >
+      Contact Ayush →
+    </button>
+)}
+
+</div>
+
+
                           </div>
 
                           <div className="flex items-center justify-between">
@@ -456,27 +489,32 @@ const AyushChatbot = () => {
                               {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                             </div>
 
-                            {message.isBot && (
-                              <div className="ml-2">
-                                <button
-                                  onClick={() => {
-                                    // toggle translation for this message
-                                    if (translatedMap[message.id]) {
-                                      const copy = { ...translatedMap };
-                                      delete copy[message.id];
-                                      setTranslatedMap(copy);
-                                    } else {
-                                      const translated = translateToGerman(message.text);
-                                      setTranslatedMap({ ...translatedMap, [message.id]: translated });
-                                    }
-                                  }}
-                                  className="text-xs px-2 py-1 bg-white/20 rounded-md hover:bg-white/30"
-                                  title="Toggle translation to German"
-                                >
-                                  DE
-                                </button>
-                              </div>
-                            )}
+{message.isBot && (
+  <div className="ml-2">
+    <button
+      onClick={() => {
+        if (translatedMap[message.id]) {
+          const copy = { ...translatedMap };
+          delete copy[message.id];
+          setTranslatedMap(copy);
+        } else {
+          if (lang === "en") {
+            const translated = translateToGerman(message.text);
+
+            setTranslatedMap({
+              ...translatedMap,
+              [message.id]: translated
+            });
+          }
+        }
+      }}
+      className="text-xs px-2 py-1 bg-white/20 rounded-md hover:bg-white/30"
+      title="Toggle translation to German"
+    >
+      {translatedMap[message.id] ? "EN" : "DE"}
+    </button>
+  </div>
+)}
                           </div>
                         </div>
                       </div>
