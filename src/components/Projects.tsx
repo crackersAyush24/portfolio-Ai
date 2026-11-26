@@ -13,6 +13,16 @@ const Projects: FC<ProjectsProps> = ({ darkMode }) => {
 
   const projects = [
     {
+      title: "Real-Time AI Pothole Detection System (Holperfrei)",
+      description: translations.projects[lang].descriptions.pothole,
+      image: "https://images.pexels.com/photos/2449452/pexels-photo-2449452.jpeg?auto=compress&cs=tinysrgb&w=800",
+      technologies: ["Python", "PyTorch", "YOLOv8", "OpenCV", "Streamlit", "WebRTC", "Apple MPS", "GDPR Privacy Blur"],
+      icon: <Eye size={24} className={darkMode ? 'text-teal-400' : 'text-teal-600'} />,
+      github: "https://github.com/ShadowPaint-SP/Holperfrei",
+      demo: "#",
+      featured: true
+    },
+    {
       title: "Image Denoising & Segmentation for Chemical-Peeled Images",
       description: translations.projects[lang].descriptions.denoising,
       image: "https://images.pexels.com/photos/356040/pexels-photo-356040.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -36,7 +46,7 @@ const Projects: FC<ProjectsProps> = ({ darkMode }) => {
       title: "Handwritten Digit Classification using Keras",
       description: translations.projects[lang].descriptions.mnist,
       image: "https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=600",
-      technologies: ["Python", "Streamlit", "Plotly", "Deep-Learning"," TensorFlow"," Keras", "NumPy", "Matplotlib"],
+      technologies: ["Python", "Streamlit", "Plotly", "Deep-Learning", "TensorFlow", "Keras", "NumPy", "Matplotlib"],
       icon: <Eye size={24} className={darkMode ? 'text-teal-400' : 'text-teal-600'} />,
       github: "https://github.com/crackersAyush24/mnist_streamlit_app",
       demo: "#",
@@ -62,14 +72,11 @@ const Projects: FC<ProjectsProps> = ({ darkMode }) => {
       demo: "https://journals.mriindia.com/index.php/ijeecs/article/view/230",
       featured: true
     }
-    ,
-    
   ];
 
   const sectionBg = darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900';
   const cardBg = darkMode ? 'bg-gray-800 border-gray-700 text-gray-100' : 'bg-gradient-to-br from-gray-50 to-blue-50';
   const subTextColor = darkMode ? 'text-gray-300' : 'text-gray-600';
-
 
   return (
     <section id="projects" className={`py-20 transition-colors duration-500 ${sectionBg}`}>
@@ -92,7 +99,8 @@ const Projects: FC<ProjectsProps> = ({ darkMode }) => {
               className={`grid lg:grid-cols-2 gap-12 items-center relative z-10 p-8 rounded-2xl ${project.featured ? cardBg : ''}`}
             >
               <div className={index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}>
-                <motion.div className="relative group overflow-hidden rounded-xl shadow-lg transform transition-all duration-500 perspective-1000 hologram-effect"
+                <motion.div
+                  className="relative group overflow-hidden rounded-xl shadow-lg transform transition-all duration-500 perspective-1000 hologram-effect"
                   whileHover={{ scale: 1.03 }}
                 >
                   <motion.img
@@ -137,14 +145,18 @@ const Projects: FC<ProjectsProps> = ({ darkMode }) => {
                 <div className="flex gap-4">
                   <a
                     href={project.github}
-                    className="flex items-center gap-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 font-medium transition-colors duration-200"
                   >
                     <Github size={20} />
                     {translations.projectsMeta[lang].buttons.code}
                   </a>
                   <a
                     href={project.demo}
-                    className="flex items-center gap-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 font-medium transition-colors duration-200"
                   >
                     <ExternalLink size={20} />
                     {translations.projectsMeta[lang].buttons.demo}
