@@ -13,9 +13,9 @@ const Projects: FC<ProjectsProps> = ({ darkMode }) => {
 
   const projects = [
     {
-      title: "Real-Time AI Pothole Detection System",
+      title: "Real-Time AI Pothole Detection System (Holperfrei)",
       description: translations.projects[lang].descriptions.pothole,
-      image: "/Users/ayushchaubey/Desktop/portfolio-Ai/public/Screenshot 2026-11-25 at 10.57.44 AM.png",
+      image: "/pothole-demo.png",
       technologies: ["Python", "PyTorch", "YOLOv8", "OpenCV", "Streamlit", "WebRTC", "Apple MPS", "GDPR Privacy Blur"],
       icon: <Eye size={24} className={darkMode ? 'text-teal-400' : 'text-teal-600'} />,
       github: "https://github.com/crackersAyush24/portfolio-Ai",
