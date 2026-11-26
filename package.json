@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://ayushchaubey.com",
+  "homepage": "https://ayushchaubey.de",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
